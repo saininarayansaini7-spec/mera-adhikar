@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { ActionGuide, L, Lang, Right, Situation } from './types';
+import type { Act, ActionGuide, L, Lang, Right, Situation } from './types';
 import { t } from './types';
 import { DUTIES, PREAMBLE } from './data/learn';
 import { UI } from './ui';
@@ -62,6 +62,20 @@ export function actionSpeech(a: ActionGuide, lang: Lang): string {
     t(UI.documents, lang) + '.',
     list(a.documents, lang),
     a.ifRefused ? t(UI.ifRefused, lang) + '. ' + list(a.ifRefused, lang) : undefined,
+  );
+}
+
+export function actSpeech(a: Act, lang: Lang): string {
+  return script(
+    t(a.short, lang) + '.',
+    t(a.name, lang) + ', ' + a.year + '.',
+    t(a.what, lang),
+    t(UI.whoItProtects, lang) + '. ' + t(a.whoItProtects, lang),
+    t(UI.whatItSays, lang) + '.',
+    list(a.keyPoints, lang),
+    a.punishment ? t(UI.penalty, lang) + '. ' + t(a.punishment, lang) : undefined,
+    t(UI.howToUse, lang) + '.',
+    list(a.useIt, lang),
   );
 }
 

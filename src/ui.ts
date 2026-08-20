@@ -18,8 +18,8 @@ export const UI = {
   quiz: { en: 'Quiz', hi: 'प्रश्नोत्तरी' },
   search: { en: 'Search', hi: 'खोजें' },
   searchPlaceholder: {
-    en: 'Search rights, situations, helplines…',
-    hi: 'अधिकार, परिस्थिति, हेल्पलाइन खोजें…',
+    en: 'Search rights, laws, situations…',
+    hi: 'अधिकार, कानून, परिस्थिति खोजें…',
   },
   noResults: { en: 'Nothing found. Try another word.', hi: 'कुछ नहीं मिला। दूसरा शब्द आज़माएँ।' },
   back: { en: 'Back', hi: 'वापस' },
@@ -83,6 +83,15 @@ export const UI = {
   resumeAloud: { en: 'Continue', hi: 'जारी रखें' },
   stopAloud: { en: 'Stop', hi: 'बंद करें' },
   textSize: { en: 'Text size', hi: 'अक्षर का आकार' },
+  laws: { en: 'Laws', hi: 'कानून' },
+  lawsFull: { en: 'Acts of Parliament', hi: 'संसद के अधिनियम' },
+  whoItProtects: { en: 'Who it protects', hi: 'किसकी रक्षा करता है' },
+  replaces: { en: 'Replaced', hi: 'किसकी जगह ली' },
+  whatItSays: { en: 'What the law says', hi: 'कानून क्या कहता है' },
+  penalty: { en: 'Punishment', hi: 'सज़ा' },
+  howToUse: { en: 'How to use it', hi: 'इसका उपयोग कैसे करें' },
+  whenItApplies: { en: 'When this law applies', hi: 'यह कानून कब लगता है' },
+  relatedLaws: { en: 'The laws behind this', hi: 'इसके पीछे के कानून' },
 } satisfies Record<string, L>;
 
 /** Reads and writes a value in localStorage, surviving a blocked/full store. */

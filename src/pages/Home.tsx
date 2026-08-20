@@ -1,4 +1,5 @@
 import { ACTIONS } from '../data/actions';
+import { ACTS } from '../data/acts';
 import { HELPLINES } from '../data/helplines';
 import { RIGHTS } from '../data/rights';
 import { SITUATIONS } from '../data/situations';
@@ -53,10 +54,20 @@ export function Home({ lang }: { lang: Lang }) {
             <span className="tile-title">{t(UI.act, lang)}</span>
             <span className="tile-sub">{ACTIONS.length}</span>
           </button>
+          <button className="tile maroon" onClick={() => go('/laws')}>
+            <span className="tile-icon">📕</span>
+            <span className="tile-title">{t(UI.laws, lang)}</span>
+            <span className="tile-sub">{ACTS.length}</span>
+          </button>
           <button className="tile grey" onClick={() => go('/learn')}>
             <span className="tile-icon">📖</span>
             <span className="tile-title">{t(UI.basics, lang)}</span>
             <span className="tile-sub">51A</span>
+          </button>
+          <button className="tile purple" onClick={() => go('/quiz')}>
+            <span className="tile-icon">🎓</span>
+            <span className="tile-title">{t(UI.quiz, lang)}</span>
+            <span className="tile-sub">10</span>
           </button>
         </div>
       </Section>

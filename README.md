@@ -31,6 +31,7 @@ No API keys, no backend, no database. Everything is a static bundle.
 | **Rights** | The 6 Fundamental Rights (Part III, Articles 12–35) — plain-language meaning, an article-by-article breakdown, real-life examples, what to do when one is violated, the limits, and landmark judgments |
 | **Situations** | 15 "what do I do if…" guides — police stop or arrest, FIR refused, women's rights, workplace harassment, wages, consumer fraud, school admission, a child in danger, caste atrocity, online fraud, traffic stop, a bribe demand, disability, senior citizens, hospital refusal |
 | **Take Action** | 8 filing guides with steps, cost, deadlines and copy-paste drafts — FIR, RTI, consumer complaint, free legal aid, complaint against police, POSH complaint, writ petition / PIL, CPGRAMS |
+| **Laws** | 24 Acts of Parliament in plain language, grouped into nine areas — what each says, who it protects, the penalty, and how to invoke it. Cross-linked both ways with the situations |
 | **Helplines** | 14 national numbers, tap to dial, plus 10 official complaint portals |
 | **Learn** | The Preamble, 11 Fundamental Duties (Art 51A), 14 Directive Principles, key facts, and a 10-question quiz |
 
@@ -70,6 +71,7 @@ src/data/rights.ts       6 fundamental rights
 src/data/situations.ts   the "what do I do if…" guides
 src/data/actions.ts      filing guides + copy-paste drafts
 src/data/helplines.ts    numbers and portals
+src/data/acts.ts         the 24 Acts of Parliament
 src/data/learn.ts        preamble, duties, directive principles, facts, quiz
 ```
 
@@ -81,8 +83,10 @@ Every user-facing string is a `{ en, hi }` pair (the `L` type in `src/types.ts`)
 the users. Copy the shape of an existing entry — the types will tell you what is
 missing.
 
-Situations and actions cross-link by id: a situation's `actions: ['fir', 'legal-aid']`
-renders cards linking to those guides.
+Everything cross-links by id. A situation's `actions: ['fir', 'legal-aid']` and
+`acts: ['bnss', 'bns']` render cards linking to those guides and laws; an Act's
+`situations: [...]` links back the other way. Add an id that does not exist and the
+card is simply skipped, so a half-finished link never crashes a page.
 
 ## A note on section numbers
 
@@ -108,6 +112,9 @@ Deliberately small. React 19 + TypeScript + Vite, and nothing else at runtime:
   bookmark hooks (both `localStorage`-backed, both survive a blocked or full store).
 - `src/search.ts` — a flat index built from the data files at module load; word-wise
   scoring where a title match outranks a body match.
+- `src/match.ts` — matches a search term at the start of a word rather than anywhere
+  in the text, so "ration" no longer finds "registration". Scans by hand instead of
+  building a RegExp, which keeps user input out of the regex engine.
 - `src/components/ui.tsx` — the shared pieces (`Card`, `Bullets`, `NumberedSteps`, …).
 - `src/speech.ts` — composes the spoken version of each page and drives
   `speechSynthesis`.

@@ -1,4 +1,6 @@
+import { startsWord } from './match';
 import { ACTIONS } from './data/actions';
+import { ACTS } from './data/acts';
 import { HELPLINES } from './data/helplines';
 import { DUTIES, PRINCIPLES } from './data/learn';
 import { RIGHTS } from './data/rights';
@@ -12,7 +14,7 @@ export type Hit = {
   icon: string;
   title: L;
   subtitle: L;
-  kind: 'right' | 'situation' | 'action' | 'helpline' | 'duty' | 'principle';
+  kind: 'right' | 'situation' | 'action' | 'law' | 'helpline' | 'duty' | 'principle';
   /** Everything searchable about this entry, both languages, lowercased. */
   haystack: string;
 };
@@ -74,6 +76,16 @@ export const INDEX: Hit[] = [
       flat(a.documents),
       a.steps.map((s) => `${s.title.en} ${s.title.hi} ${s.detail.en} ${s.detail.hi}`).join(' '),
     ),
+  })),
+
+  ...ACTS.map<Hit>((a) => ({
+    id: a.id,
+    route: `/laws/${a.id}`,
+    icon: a.icon,
+    title: a.short,
+    subtitle: a.what,
+    kind: 'law',
+    haystack: join(a.short, a.name, a.year, a.what, a.whoItProtects, a.replaces, flat(a.keyPoints), a.punishment, flat(a.useIt)),
   })),
 
   ...HELPLINES.map<Hit>((h) => ({
@@ -153,8 +165,8 @@ const HINGLISH: Record<string, string> = {
   jati: 'caste जाति',
   jaati: 'caste जाति',
   bhedbhav: 'discrimination भेदभाव equality',
-  bandhua: 'bonded बंधुआ labour',
-  begar: 'forced labour बेगार',
+  bandhua: 'bonded बंधुआ',
+  begar: 'बेगार forced bonded',
   balshram: 'child labour बाल श्रम',
 
   // what you want
@@ -228,6 +240,33 @@ const HINGLISH: Record<string, string> = {
   online: 'cyber online साइबर fraud',
   mobile: 'cyber online साइबर fraud',
   otp: 'cyber fraud साइबर 1930',
+
+  // property, family and welfare
+  beti: 'daughter बेटी succession inheritance',
+  beta: 'son बेटा succession inheritance',
+  sampatti: 'property संपत्ति succession',
+  jaydad: 'property संपत्ति succession',
+  zameen: 'land property संपत्ति',
+  batwara: 'partition बँटवारा succession property',
+  virasat: 'inheritance उत्तराधिकार succession',
+  shaadi: 'marriage विवाह',
+  vivah: 'marriage विवाह',
+  rashan: 'ration राशन food अनाज',
+  anaj: 'grain अनाज food ration',
+  bhojan: 'food भोजन ration',
+  rozgar: 'employment रोजगार MGNREGA',
+  manrega: 'MGNREGA मनरेगा employment rural',
+  narega: 'MGNREGA मनरेगा employment rural',
+  jobcard: 'MGNREGA job card रोजगार',
+  gratuity: 'gratuity उपदान',
+  upadan: 'gratuity उपदान',
+  bonus: 'wages bonus मज़दूरी',
+  bima: 'insurance बीमा vehicle',
+  chikitsa: 'medical चिकित्सा hospital',
+
+  dhara: 'section धारा',
+  adhiniyam: 'act अधिनियम law',
+  sanhita: 'sanhita संहिता code',
 };
 
 /** Widen a typed word into the words the content actually uses. */
@@ -236,24 +275,26 @@ function expand(word: string): string[] {
   return extra ? [word, ...extra.toLowerCase().split(/\s+/)] : [word];
 }
 
-/** Word-wise scoring: a title match beats a body match, and all words must appear. */
+/** Word-wise scoring: a title match beats a body match, and every word must appear. */
 export function search(query: string, lang: Lang): Hit[] {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (words.length === 0) return [];
+
+  const terms = words.map(expand);
 
   const scored = INDEX.map((hit) => {
     const title = t(hit.title, lang).toLowerCase();
     const subtitle = t(hit.subtitle, lang).toLowerCase();
     let score = 0;
 
-    for (const word of words) {
-      // A word counts as found if the word itself, or any of the terms it
-      // expands into, appears. The page named after what you asked for should
-      // beat one that merely mentions it, so the title outranks everything.
-      const best = expand(word).reduce((acc, form) => {
-        if (title.includes(form)) return Math.max(acc, 12);
-        if (subtitle.includes(form)) return Math.max(acc, 7);
-        if (hit.haystack.includes(form)) return Math.max(acc, 3);
+    for (const forms of terms) {
+      // A word counts as found if it, or any term it expands into, appears.
+      // The page named after what you asked for should beat one that merely
+      // mentions it, so the title outranks everything else.
+      const best = forms.reduce((acc, form) => {
+        if (startsWord(title, form)) return Math.max(acc, 12);
+        if (startsWord(subtitle, form)) return Math.max(acc, 7);
+        if (startsWord(hit.haystack, form)) return Math.max(acc, 3);
         return acc;
       }, 0);
 

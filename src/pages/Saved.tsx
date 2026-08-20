@@ -1,4 +1,5 @@
 import { ACTION_BY_ID } from '../data/actions';
+import { ACT_BY_ID } from '../data/acts';
 import { RIGHT_BY_ID } from '../data/rights';
 import { SITUATION_BY_ID } from '../data/situations';
 import { search } from '../search';
@@ -20,6 +21,10 @@ function resolve(key: string, lang: Lang) {
   if (kind === 'situation') {
     const s = SITUATION_BY_ID[id];
     return s && { to: `/situations/${id}`, icon: s.icon, title: t(s.title, lang), subtitle: t(s.summary, lang) };
+  }
+  if (kind === 'law') {
+    const l = ACT_BY_ID[id];
+    return l && { to: `/laws/${id}`, icon: l.icon, title: t(l.short, lang), subtitle: t(l.what, lang) };
   }
   if (kind === 'action') {
     const a = ACTION_BY_ID[id];
@@ -63,6 +68,7 @@ export function SearchResults({ query, lang }: { query: string; lang: Lang }) {
     right: { en: 'Fundamental right', hi: 'मौलिक अधिकार' },
     situation: { en: 'Situation', hi: 'परिस्थिति' },
     action: { en: 'How to file', hi: 'कैसे दायर करें' },
+    law: { en: 'Act of Parliament', hi: 'संसद का अधिनियम' },
     helpline: { en: 'Helpline', hi: 'हेल्पलाइन' },
     duty: { en: 'Fundamental duty', hi: 'मौलिक कर्तव्य' },
     principle: { en: 'Directive principle', hi: 'नीति निदेशक तत्व' },

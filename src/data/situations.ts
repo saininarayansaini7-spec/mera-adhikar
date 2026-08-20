@@ -116,6 +116,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '15100'],
     actions: ['legal-aid', 'police-complaint', 'writ'],
+    acts: ['bnss', 'bns', 'legal-services'],
   },
 
   {
@@ -198,6 +199,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '15100'],
     actions: ['fir', 'police-complaint', 'legal-aid'],
+    acts: ['bnss', 'legal-services'],
   },
 
   {
@@ -294,6 +296,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '181', '1091', '15100'],
     actions: ['fir', 'posh', 'legal-aid'],
+    acts: ['pwdva', 'dowry', 'bns', 'legal-services'],
   },
 
   {
@@ -381,6 +384,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['181', '15100'],
     actions: ['posh', 'fir', 'legal-aid'],
+    acts: ['posh'],
   },
 
   {
@@ -478,6 +482,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['1800111565', '15100'],
     actions: ['grievance', 'legal-aid'],
+    acts: ['wages-code', 'gratuity', 'bonded-labour'],
   },
 
   {
@@ -533,6 +538,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: [],
     actions: ['consumer', 'grievance'],
+    acts: ['consumer'],
   },
 
   {
@@ -593,6 +599,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['1098', 'ragging'],
     actions: ['grievance', 'writ'],
+    acts: ['rte'],
   },
 
   {
@@ -658,6 +665,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['1098', '112'],
     actions: ['fir', 'legal-aid'],
+    acts: ['pocso', 'child-labour', 'rte'],
   },
 
   {
@@ -730,6 +738,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '15100'],
     actions: ['fir', 'legal-aid', 'police-complaint'],
+    acts: ['sc-st-act'],
   },
 
   {
@@ -805,6 +814,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['1930', '112'],
     actions: ['fir', 'grievance'],
+    acts: ['it-act'],
   },
 
   {
@@ -854,6 +864,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '1064'],
     actions: ['police-complaint', 'grievance'],
+    acts: ['motor-vehicles'],
   },
 
   {
@@ -910,6 +921,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['1064'],
     actions: ['rti', 'grievance', 'police-complaint'],
+    acts: ['pc-act', 'rti'],
   },
 
   {
@@ -961,6 +973,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['15100'],
     actions: ['grievance', 'writ', 'legal-aid'],
+    acts: ['rpwd'],
   },
 
   {
@@ -1018,6 +1031,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['14567', '15100'],
     actions: ['legal-aid', 'grievance'],
+    acts: ['senior-citizens'],
   },
 
   {
@@ -1074,6 +1088,7 @@ export const SITUATIONS: Situation[] = [
     ],
     helplines: ['112', '108'],
     actions: ['consumer', 'grievance'],
+    acts: ['consumer', 'motor-vehicles'],
   },
 ];
 

@@ -1,5 +1,6 @@
 import { ACTION_BY_ID } from '../data/actions';
 import { HELPLINES } from '../data/helplines';
+import { ACT_BY_ID } from '../data/acts';
 import { SITUATIONS, SITUATION_BY_ID } from '../data/situations';
 import type { Lang } from '../types';
 import { t } from '../types';
@@ -84,6 +85,19 @@ export function SituationDetail({
       <Section title={t(UI.lawsInvolved, lang)} icon="📚">
         <Bullets items={s.laws} lang={lang} marker="§" />
       </Section>
+
+      {(s.acts ?? []).length > 0 && (
+        <Section title={t(UI.relatedLaws, lang)} icon="📕">
+          <div className="cards">
+            {(s.acts ?? [])
+              .map((id) => ACT_BY_ID[id])
+              .filter(Boolean)
+              .map((a) => (
+                <Card key={a.id} to={`/laws/${a.id}`} icon={a.icon} title={t(a.short, lang)} subtitle={t(a.what, lang)} />
+              ))}
+          </div>
+        </Section>
+      )}
 
       {s.actions && s.actions.length > 0 && (
         <Section title={t(UI.relatedActions, lang)} icon="📂">

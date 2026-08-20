@@ -51,6 +51,8 @@ export type Situation = {
   laws: L[];
   helplines?: string[];
   actions?: string[];
+  /** ids of the Acts this situation runs on */
+  acts?: string[];
 };
 
 export type ActionGuide = {
@@ -82,6 +84,41 @@ export type Portal = {
   name: L;
   url: string;
   what: L;
+};
+
+export type ActCategory =
+  | 'criminal'
+  | 'women'
+  | 'children'
+  | 'equality'
+  | 'work'
+  | 'money'
+  | 'transparency'
+  | 'family'
+  | 'welfare';
+
+/** An Act of Parliament — the machinery that turns a constitutional right into a remedy. */
+export type Act = {
+  id: string;
+  icon: string;
+  /** How people actually refer to it: "POSH Act", "RTI". */
+  short: L;
+  /** The full name as enacted. */
+  name: L;
+  year: string;
+  category: ActCategory;
+  /** What the law does, in one sentence. */
+  what: L;
+  /** The older law it replaced, where that still confuses people. */
+  replaces?: L;
+  whoItProtects: L;
+  /** The provisions worth knowing, in plain language. */
+  keyPoints: L[];
+  punishment?: L;
+  /** How to actually invoke it. */
+  useIt: L[];
+  situations?: string[];
+  actions?: string[];
 };
 
 export type Duty = { n: number; text: L; everyday: L };

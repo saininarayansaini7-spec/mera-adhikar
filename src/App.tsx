@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { RightDetail, RightsList, NotFound } from './pages/Rights';
 import { SituationDetail, SituationsList } from './pages/Situations';
 import { ActionDetail, ActionsList } from './pages/Actions';
+import { ActDetail, ActsList } from './pages/Acts';
 import { Helplines } from './pages/Helplines';
 import { Learn } from './pages/Learn';
 import { Quiz } from './pages/Quiz';
@@ -112,6 +113,7 @@ export default function App() {
     if (route === '/rights') return <RightsList lang={lang} />;
     if (route === '/situations') return <SituationsList lang={lang} />;
     if (route === '/actions') return <ActionsList lang={lang} />;
+    if (route === '/laws') return <ActsList lang={lang} />;
     if (route === '/helplines') return <Helplines lang={lang} />;
     if (route === '/learn') return <Learn lang={lang} />;
     if (route === '/quiz') return <Quiz lang={lang} />;
@@ -136,6 +138,17 @@ export default function App() {
           lang={lang}
           saved={bookmarks.has(`situation:${situation.id}`)}
           onToggleSave={() => bookmarks.toggle(`situation:${situation.id}`)}
+        />
+      );
+
+    const law = match(route, '/laws/:id');
+    if (law)
+      return (
+        <ActDetail
+          id={law.id}
+          lang={lang}
+          saved={bookmarks.has(`law:${law.id}`)}
+          onToggleSave={() => bookmarks.toggle(`law:${law.id}`)}
         />
       );
 

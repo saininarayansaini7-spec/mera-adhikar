@@ -350,6 +350,14 @@ h4 {
   background: var(--text-3);
 }
 
+.tile.maroon::before {
+  background: #9c2a2a;
+}
+
+.tile.purple::before {
+  background: #6b4bb8;
+}
+
 .tile-icon {
   font-size: 1.5rem;
   line-height: 1;
@@ -1126,6 +1134,43 @@ h4 {
   font-size: 0.8125rem;
   line-height: 1.55;
   color: var(--text-3);
+}
+
+/* ---------- law library ---------- */
+
+/* Category filter across the top of the Acts list. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.chip {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-2);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  min-height: 38px;
+}
+
+.chip.on {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.penalty {
+  background: var(--danger-soft);
+  border-left: 4px solid var(--danger);
+  border-radius: 0 12px 12px 0;
+  padding: 13px 14px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-2);
 }
 
 /* ---------- text size ---------- */
