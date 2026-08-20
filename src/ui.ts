@@ -78,6 +78,11 @@ export const UI = {
   allRights: { en: 'All 6 fundamental rights', hi: 'सभी 6 मौलिक अधिकार' },
   portals: { en: 'Official complaint portals', hi: 'सरकारी शिकायत पोर्टल' },
   keyFacts: { en: 'Key facts', hi: 'मुख्य तथ्य' },
+  readAloud: { en: 'Listen', hi: 'सुनें' },
+  pauseAloud: { en: 'Pause', hi: 'रोकें' },
+  resumeAloud: { en: 'Continue', hi: 'जारी रखें' },
+  stopAloud: { en: 'Stop', hi: 'बंद करें' },
+  textSize: { en: 'Text size', hi: 'अक्षर का आकार' },
 } satisfies Record<string, L>;
 
 /** Reads and writes a value in localStorage, surviving a blocked/full store. */
@@ -114,6 +119,25 @@ export function useLang(): [Lang, (l: Lang) => void] {
   }, [lang]);
 
   return [lang, setLang];
+}
+
+export const TEXT_SIZES = ['normal', 'large', 'xlarge'] as const;
+export type TextSize = (typeof TEXT_SIZES)[number];
+
+/**
+ * Scales every piece of text in the app. Font sizes are in rem, so moving the
+ * root size moves all of them together without disturbing the layout.
+ */
+export function useTextSize(): [TextSize, () => void] {
+  const [size, setSize] = usePersisted<TextSize>('ma.textsize', 'normal');
+
+  useEffect(() => {
+    document.documentElement.dataset.text = size;
+  }, [size]);
+
+  const cycle = () => setSize(TEXT_SIZES[(TEXT_SIZES.indexOf(size) + 1) % TEXT_SIZES.length]);
+
+  return [size, cycle];
 }
 
 export function useBookmarks() {

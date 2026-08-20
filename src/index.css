@@ -25,7 +25,9 @@
   --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
   color-scheme: light dark;
-  font: 16px/1.55 var(--sans);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
 }
@@ -119,12 +121,12 @@ h4 {
 }
 
 .brand-mark {
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 1;
 }
 
 .brand-name {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
@@ -141,7 +143,7 @@ h4 {
   color: #fff;
   border-radius: 999px;
   padding: 7px 14px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   min-height: 36px;
 }
@@ -157,7 +159,7 @@ h4 {
   border-radius: 999px;
   width: 36px;
   height: 36px;
-  font-size: 17px;
+  font-size: 1.0625rem;
   display: grid;
   place-items: center;
 }
@@ -238,12 +240,12 @@ h4 {
 }
 
 .tab-icon {
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1.1;
 }
 
 .tab-label {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-align: center;
 }
@@ -292,14 +294,14 @@ h4 {
 }
 
 .hero h1 {
-  font-size: 27px;
+  font-size: 1.6875rem;
   letter-spacing: -0.3px;
 }
 
 .hero p {
   margin: 8px 0 0;
   color: var(--text-2);
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .tiles {
@@ -349,18 +351,18 @@ h4 {
 }
 
 .tile-icon {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
 .tile-title {
   font-weight: 700;
-  font-size: 14.5px;
+  font-size: 0.9062rem;
   color: var(--text);
 }
 
 .tile-sub {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--text-3);
   font-weight: 600;
 }
@@ -372,7 +374,7 @@ h4 {
 }
 
 .section-title {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.7px;
@@ -381,13 +383,13 @@ h4 {
 }
 
 .section-note {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-2);
   margin: 0 0 12px 2px;
 }
 
 .lede {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
   color: var(--text-2);
   margin: 0 0 16px;
@@ -398,20 +400,20 @@ h4 {
 }
 
 .page-icon {
-  font-size: 34px;
+  font-size: 2.125rem;
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .page-title h1 {
-  font-size: 25px;
+  font-size: 1.5625rem;
   letter-spacing: -0.3px;
 }
 
 .page-title p {
   margin: 6px 0 0;
   color: var(--text-3);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -445,7 +447,7 @@ h4 {
 }
 
 .card-icon {
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 1.2;
   flex: none;
 }
@@ -460,18 +462,18 @@ h4 {
 
 .card-title {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--text);
 }
 
 .card-sub {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-2);
   line-height: 1.45;
 }
 
 .card-meta {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--blue);
   letter-spacing: 0.2px;
@@ -480,7 +482,7 @@ h4 {
 
 .card-chev {
   color: var(--text-3);
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 1;
   flex: none;
   align-self: center;
@@ -508,7 +510,7 @@ h4 {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 13px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--text-2);
 }
@@ -543,7 +545,7 @@ h4 {
   display: flex;
   gap: 11px;
   align-items: flex-start;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--text-2);
   background: var(--surface);
@@ -559,7 +561,7 @@ h4 {
   border-radius: 999px;
   background: var(--blue);
   color: #fff;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   display: grid;
   place-items: center;
@@ -590,12 +592,12 @@ h4 {
 }
 
 .big-step-head h3 {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .big-steps p {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--text-2);
 }
@@ -617,7 +619,7 @@ h4 {
 }
 
 .article-card h3 {
-  font-size: 16px;
+  font-size: 1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -625,7 +627,7 @@ h4 {
 }
 
 .art-num {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #fff;
   background: var(--blue);
@@ -636,7 +638,7 @@ h4 {
 
 .article-card p {
   margin: 8px 0 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--text-2);
 }
@@ -654,13 +656,13 @@ h4 {
 }
 
 .case h4 {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--blue);
 }
 
 .case p {
   margin: 6px 0 0;
-  font-size: 14.5px;
+  font-size: 0.9062rem;
   line-height: 1.5;
   color: var(--text-2);
 }
@@ -680,13 +682,13 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--text-2);
   line-height: 1.5;
 }
 
 .fact-label {
-  font-size: 11.5px;
+  font-size: 0.7188rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -703,7 +705,7 @@ h4 {
 }
 
 .pill {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--blue);
   background: var(--blue-soft);
@@ -748,13 +750,13 @@ h4 {
 }
 
 .call-num {
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-weight: 800;
   letter-spacing: 0.4px;
 }
 
 .call-name {
-  font-size: 11px;
+  font-size: 0.6875rem;
   opacity: 0.92;
   white-space: nowrap;
   overflow: hidden;
@@ -782,7 +784,7 @@ h4 {
 
 .helpline-num {
   flex: none;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 800;
   color: #fff;
   background: var(--green);
@@ -799,18 +801,18 @@ h4 {
 
 .helpline-name {
   font-weight: 700;
-  font-size: 15.5px;
+  font-size: 0.9688rem;
 }
 
 .helpline-who {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-2);
   line-height: 1.45;
   margin-top: 3px;
 }
 
 .helpline-hours {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--text-3);
   margin-top: 5px;
   font-weight: 600;
@@ -834,18 +836,18 @@ h4 {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 13px;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .link-what {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-2);
   font-weight: 400;
   line-height: 1.45;
 }
 
 .link-url {
-  font-size: 12.5px;
+  font-size: 0.7812rem;
   color: var(--blue);
   font-weight: 700;
   word-break: break-all;
@@ -868,13 +870,13 @@ h4 {
 }
 
 .template-head h3 {
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .template pre {
   margin: 0;
   padding: 14px 13px;
-  font: 13px/1.6 var(--mono);
+  font: 0.8125rem/1.6 var(--mono);
   color: var(--text-2);
   white-space: pre-wrap;
   word-break: break-word;
@@ -888,7 +890,7 @@ h4 {
   border: 0;
   border-radius: 999px;
   padding: 8px 16px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   min-height: 38px;
 }
@@ -903,7 +905,7 @@ h4 {
   border-radius: 12px;
   padding: 18px 16px;
   white-space: pre-line;
-  font-size: 15.5px;
+  font-size: 0.9688rem;
   line-height: 1.7;
   color: var(--text-2);
 }
@@ -930,7 +932,7 @@ h4 {
   border-radius: 999px;
   background: var(--saffron);
   color: #fff;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 800;
   display: grid;
   place-items: center;
@@ -938,14 +940,14 @@ h4 {
 
 .duty-text {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--text);
 }
 
 .duty-everyday {
   margin: 6px 0 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.45;
   color: var(--text-3);
 }
@@ -968,13 +970,13 @@ h4 {
 
 .quiz-count {
   margin: 0 0 14px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-3);
 }
 
 .quiz-q {
-  font-size: 19px;
+  font-size: 1.1875rem;
   line-height: 1.4;
   margin-bottom: 16px;
 }
@@ -991,7 +993,7 @@ h4 {
   border: 1.5px solid var(--border);
   border-radius: 12px;
   padding: 14px 14px;
-  font-size: 15.5px;
+  font-size: 0.9688rem;
   min-height: 50px;
   color: var(--text);
 }
@@ -1015,7 +1017,7 @@ h4 {
   margin-top: 16px;
   border-radius: 12px;
   padding: 14px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
 
@@ -1042,7 +1044,7 @@ h4 {
 }
 
 .score-big {
-  font-size: 44px;
+  font-size: 2.75rem;
   font-weight: 800;
   color: var(--blue);
   letter-spacing: -1px;
@@ -1050,7 +1052,7 @@ h4 {
 
 .score-card p {
   color: var(--text-2);
-  font-size: 15.5px;
+  font-size: 0.9688rem;
   margin: 8px 0 20px;
 }
 
@@ -1062,7 +1064,7 @@ h4 {
   border: 0;
   border-radius: 999px;
   padding: 12px 22px;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
   min-height: 46px;
 }
@@ -1075,7 +1077,7 @@ h4 {
   background: none;
   border: 0;
   color: var(--blue);
-  font-size: 14.5px;
+  font-size: 0.9062rem;
   font-weight: 700;
   padding: 6px 0;
   margin-bottom: 4px;
@@ -1083,13 +1085,14 @@ h4 {
 
 .bookmark {
   display: inline-flex;
+  vertical-align: middle;
   align-items: center;
   gap: 7px;
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 999px;
   padding: 9px 17px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--text-2);
   margin-bottom: 22px;
@@ -1110,7 +1113,7 @@ h4 {
 
 .empty p {
   margin: 0 0 18px;
-  font-size: 15.5px;
+  font-size: 0.9688rem;
   line-height: 1.55;
 }
 
@@ -1120,9 +1123,126 @@ h4 {
   background: var(--surface-2);
   border-left: 3px solid var(--text-3);
   border-radius: 0 10px 10px 0;
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.55;
   color: var(--text-3);
+}
+
+/* ---------- text size ---------- */
+
+/* Every font size below is in rem, so moving the root moves all of them
+   together and the layout keeps its proportions. */
+:root[data-text='large'] {
+  font-size: 18.5px;
+}
+
+:root[data-text='xlarge'] {
+  font-size: 21px;
+}
+
+.text-size {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.text-size span {
+  font-size: 0.72em;
+}
+
+.text-size.text-large,
+.text-size.text-xlarge {
+  background: #fff;
+  color: var(--blue);
+  border-color: #fff;
+}
+
+/* ---------- read aloud ---------- */
+
+.read-aloud {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 8px 22px 0;
+  vertical-align: middle;
+}
+
+.read-aloud.active {
+  display: flex;
+  margin: 0 0 22px;
+}
+
+.read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--green);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  min-height: 46px;
+}
+
+.read-btn:active {
+  filter: brightness(0.92);
+}
+
+.read-icon {
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+
+.read-progress {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.read-bar {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  transition: width 0.3s ease;
+}
+
+.read-stop {
+  flex: none;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-2);
+  border-radius: 999px;
+  width: 42px;
+  height: 42px;
+  font-size: 0.75rem;
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- accessibility ---------- */
+
+/* A visible focus ring for anyone navigating by keyboard or switch. */
+:where(button, a, input):focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (min-width: 560px) {

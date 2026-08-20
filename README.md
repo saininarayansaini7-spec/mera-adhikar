@@ -36,6 +36,30 @@ No API keys, no backend, no database. Everything is a static bundle.
 
 Plus search across all of it in both languages, and bookmarks saved on the device.
 
+## Accessibility
+
+The people this app is written for are often the least able to read a wall of text.
+Three things address that directly:
+
+- **Listen.** Every rights page, situation and filing guide has a *Listen* button that
+  reads the whole guide aloud in Hindi or English, using whatever voices the device
+  has. The spoken script is composed from the data rather than scraped off the screen,
+  so headings are announced as sentences and lists read as prose. Long guides are
+  spoken in short chunks, because browsers cut a single long utterance off part-way
+  through. A device with no speech engine simply doesn't show the button.
+- **Text size.** The **Aa** button in the header cycles normal → large → extra-large
+  and remembers the choice. Every font size in the stylesheet is in `rem`, so one
+  change to the root size moves all of them together and the layout keeps its
+  proportions.
+- **Hinglish search.** A great many people type Hindi in Latin letters. `dahej`,
+  `rishwat`, `pulis`, `giraftar` and around a hundred other spellings are mapped in
+  `HINGLISH` in `src/search.ts` to the words the content actually uses. Without it
+  the app looks like it has no answer when it has a whole page on the subject.
+
+Also: visible focus rings for keyboard and switch users, `prefers-reduced-motion`
+respected, and `<html lang>` kept in step with the chosen language so screen readers
+pronounce the content correctly.
+
 ## Where the content lives
 
 All content is data. There is no content in the components — to add or edit a guide
@@ -48,6 +72,9 @@ src/data/actions.ts      filing guides + copy-paste drafts
 src/data/helplines.ts    numbers and portals
 src/data/learn.ts        preamble, duties, directive principles, facts, quiz
 ```
+
+Adding a guide automatically adds it to search and to read-aloud — both are built
+from the same data.
 
 Every user-facing string is a `{ en, hi }` pair (the `L` type in `src/types.ts`), so
 **a new entry must be written in both languages** or it will render blank for half
@@ -82,6 +109,8 @@ Deliberately small. React 19 + TypeScript + Vite, and nothing else at runtime:
 - `src/search.ts` — a flat index built from the data files at module load; word-wise
   scoring where a title match outranks a body match.
 - `src/components/ui.tsx` — the shared pieces (`Card`, `Bullets`, `NumberedSteps`, …).
+- `src/speech.ts` — composes the spoken version of each page and drives
+  `speechSynthesis`.
 - `public/sw.js` — cache-first service worker; registered from `main.tsx` in
   production only, so dev never serves stale modules.
 

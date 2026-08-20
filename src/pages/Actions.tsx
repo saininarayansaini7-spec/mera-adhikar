@@ -3,6 +3,8 @@ import type { Lang } from '../types';
 import { t } from '../types';
 import { UI } from '../ui';
 import { BackLink, BookmarkButton, Bullets, Card, CopyButton, Disclaimer, PageTitle, Section } from '../components/ui';
+import { ReadAloud } from '../components/ReadAloud';
+import { actionSpeech } from '../speech';
 import { NotFound } from './Rights';
 
 export function ActionsList({ lang }: { lang: Lang }) {
@@ -46,6 +48,7 @@ export function ActionDetail({
       <BackLink to="/actions" lang={lang} />
       <PageTitle icon={a.icon} title={t(a.title, lang)} />
       <p className="lede">{t(a.summary, lang)}</p>
+      <ReadAloud text={actionSpeech(a, lang)} lang={lang} />
       <BookmarkButton saved={saved} onToggle={onToggleSave} lang={lang} />
 
       <div className="facts">

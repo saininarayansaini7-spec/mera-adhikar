@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { go, match, useRoute } from './router';
 import { t } from './types';
-import { UI, useBookmarks, useLang } from './ui';
+import { UI, useBookmarks, useLang, useTextSize } from './ui';
 import { Home } from './pages/Home';
 import { RightDetail, RightsList, NotFound } from './pages/Rights';
 import { SituationDetail, SituationsList } from './pages/Situations';
@@ -22,6 +22,7 @@ const TABS = [
 export default function App() {
   const route = useRoute();
   const [lang, setLang] = useLang();
+  const [textSize, cycleTextSize] = useTextSize();
   const bookmarks = useBookmarks();
 
   // The search box belongs to the page it was typed on: tapping a result navigates
@@ -55,6 +56,14 @@ export default function App() {
             aria-label="Change language"
           >
             {lang === 'en' ? 'हिंदी' : 'English'}
+          </button>
+          <button
+            className={'icon-btn text-size text-' + textSize}
+            onClick={cycleTextSize}
+            aria-label={t(UI.textSize, lang)}
+            title={t(UI.textSize, lang)}
+          >
+            A<span aria-hidden="true">a</span>
           </button>
           <button className="icon-btn" onClick={() => go('/saved')} aria-label={t(UI.saved, lang)}>
             ★

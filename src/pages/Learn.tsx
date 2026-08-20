@@ -4,6 +4,8 @@ import type { Lang } from '../types';
 import { t } from '../types';
 import { UI } from '../ui';
 import { Disclaimer, PageTitle, Section } from '../components/ui';
+import { ReadAloud } from '../components/ReadAloud';
+import { learnSpeech } from '../speech';
 
 export function Learn({ lang }: { lang: Lang }) {
   return (
@@ -17,6 +19,8 @@ export function Learn({ lang }: { lang: Lang }) {
             : 'प्रस्तावना, आपके कर्तव्य, और वे लक्ष्य जिन्हें पाना राज्य का दायित्व है'
         }
       />
+
+      <ReadAloud text={learnSpeech(lang)} lang={lang} />
 
       <Section title={t(UI.preamble, lang)} icon="🇮🇳">
         <div className="preamble">{t(PREAMBLE, lang)}</div>

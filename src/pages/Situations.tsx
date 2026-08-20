@@ -5,6 +5,8 @@ import type { Lang } from '../types';
 import { t } from '../types';
 import { UI } from '../ui';
 import { BackLink, BookmarkButton, Bullets, Card, Disclaimer, NumberedSteps, PageTitle, Pills, Section } from '../components/ui';
+import { ReadAloud } from '../components/ReadAloud';
+import { situationSpeech } from '../speech';
 import { NotFound } from './Rights';
 
 export function SituationsList({ lang }: { lang: Lang }) {
@@ -51,6 +53,7 @@ export function SituationDetail({
       <PageTitle icon={s.icon} title={t(s.title, lang)} />
       <p className="lede">{t(s.summary, lang)}</p>
       <Pills items={s.tags} lang={lang} />
+      <ReadAloud text={situationSpeech(s, lang)} lang={lang} />
       <BookmarkButton saved={saved} onToggle={onToggleSave} lang={lang} />
 
       {lines.length > 0 && (

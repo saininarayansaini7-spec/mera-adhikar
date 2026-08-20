@@ -5,6 +5,8 @@ import type { Lang } from '../types';
 import { t } from '../types';
 import { UI } from '../ui';
 import { BackLink, BookmarkButton, Bullets, Card, Disclaimer, NumberedSteps, PageTitle, Section } from '../components/ui';
+import { ReadAloud } from '../components/ReadAloud';
+import { rightSpeech } from '../speech';
 
 export function RightsList({ lang }: { lang: Lang }) {
   return (
@@ -51,6 +53,7 @@ export function RightDetail({
       <BackLink to="/rights" lang={lang} />
       <PageTitle icon={right.icon} title={t(right.title, lang)} sub={t(right.articles, lang)} />
       <p className="lede">{t(right.summary, lang)}</p>
+      <ReadAloud text={rightSpeech(right, lang)} lang={lang} />
       <BookmarkButton saved={saved} onToggle={onToggleSave} lang={lang} />
 
       <Section title={t(UI.whatItMeans, lang)} icon="💡">
