@@ -10,6 +10,11 @@ what it costs, how long you have, and a draft you can copy and fill in.
 It works **offline**. The people who most need a helpline number are often the ones
 without data.
 
+### 👉 [inshashertate-sudo.github.io/mera-adhikar](https://inshashertate-sudo.github.io/mera-adhikar/)
+
+Open it on a phone and use "Add to Home Screen" — it installs like an app and keeps
+working with no connection. Every push to `main` republishes it automatically.
+
 ## Running it
 
 ```bash
