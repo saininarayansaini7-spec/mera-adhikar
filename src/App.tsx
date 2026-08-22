@@ -15,9 +15,10 @@ import { Saved, SearchResults } from './pages/Saved';
 const TABS = [
   { path: '/', icon: '🏠', label: UI.home },
   { path: '/rights', icon: '⚖️', label: UI.rights },
+  { path: '/laws', icon: '📕', label: UI.laws },
   { path: '/situations', icon: '🧭', label: UI.situations },
-  { path: '/actions', icon: '✍️', label: UI.act },
-  { path: '/helplines', icon: '📞', label: UI.help },
+  { path: '/actions', icon: '✍️', label: UI.tabAct },
+  { path: '/helplines', icon: '📞', label: UI.tabHelp },
 ];
 
 export default function App() {

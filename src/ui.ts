@@ -84,6 +84,9 @@ export const UI = {
   stopAloud: { en: 'Stop', hi: 'बंद करें' },
   textSize: { en: 'Text size', hi: 'अक्षर का आकार' },
   laws: { en: 'Laws', hi: 'कानून' },
+  // Short forms for the bottom bar, where six tabs share a phone's width.
+  tabAct: { en: 'File', hi: 'कार्रवाई' },
+  tabHelp: { en: 'Help', hi: 'हेल्पलाइन' },
   lawsFull: { en: 'Acts of Parliament', hi: 'संसद के अधिनियम' },
   whoItProtects: { en: 'Who it protects', hi: 'किसकी रक्षा करता है' },
   replaces: { en: 'Replaced', hi: 'किसकी जगह ली' },
