@@ -1,4 +1,4 @@
-import { startsWord } from './match';
+import { nearestWords, startsWord } from './match';
 import { ACTIONS } from './data/actions';
 import { ACTS } from './data/acts';
 import { HELPLINES } from './data/helplines';
@@ -220,9 +220,20 @@ const HINGLISH: Record<string, string> = {
   // things and documents
   shiksha: 'education शिक्षा school',
   padhai: 'education शिक्षा school',
+  car: 'vehicle car गाड़ी',
+  kar: 'vehicle car गाड़ी',
+  bykee: 'vehicle गाड़ी',
+  scooter: 'vehicle गाड़ी',
+  scooty: 'vehicle गाड़ी',
+  truck: 'vehicle गाड़ी',
+  auto: 'vehicle गाड़ी',
+  silencer: 'silencer exhaust modification वाहन',
+  exhaust: 'exhaust silencer modification',
+  tint: 'tint window film modification',
+  modification: 'modification alter वाहन बदलाव',
   gadi: 'vehicle traffic यातायात',
   gaadi: 'vehicle traffic यातायात',
-  bike: 'vehicle traffic यातायात',
+  bike: 'vehicle गाड़ी',
   chalan: 'challan traffic यातायात fine',
   challan: 'challan traffic यातायात fine',
   license: 'licence traffic यातायात',
@@ -269,10 +280,49 @@ const HINGLISH: Record<string, string> = {
   sanhita: 'sanhita संहिता code',
 };
 
+/**
+ * Every distinct word in the index, built once on first use.
+ *
+ * This is what makes a typo recoverable: if a query word matches nothing, we
+ * look here for the nearest real word and search for that instead.
+ */
+let vocabulary: Set<string> | null = null;
+
+function getVocabulary(): Set<string> {
+  if (vocabulary) return vocabulary;
+
+  const words = new Set<string>();
+  for (const hit of INDEX) {
+    for (const token of hit.haystack.split(/[^\p{L}\p{N}]+/u)) {
+      if (token.length > 2) words.add(token);
+    }
+  }
+  // The Hinglish keys belong here too, so "giraftaar" can still reach
+  // "giraftar" and from there "arrest".
+  for (const key of Object.keys(HINGLISH)) words.add(key);
+
+  vocabulary = words;
+  return words;
+}
+
 /** Widen a typed word into the words the content actually uses. */
 function expand(word: string): string[] {
   const extra = HINGLISH[word];
-  return extra ? [word, ...extra.toLowerCase().split(/\s+/)] : [word];
+  if (extra) return [word, ...extra.toLowerCase().split(/\s+/)];
+
+  // A word the content actually contains needs no help.
+  if (getVocabulary().has(word)) return [word];
+
+  // Otherwise it may be a misspelling. Treat the nearest real words as
+  // alternatives, and expand those through the Hinglish map in turn so
+  // "giraftaar" still reaches "arrest".
+  const guesses = nearestWords(word, getVocabulary());
+  const out = [word, ...guesses];
+  for (const guess of guesses) {
+    const viaHinglish = HINGLISH[guess];
+    if (viaHinglish) out.push(...viaHinglish.toLowerCase().split(/\s+/));
+  }
+  return out;
 }
 
 /** Word-wise scoring: a title match beats a body match, and every word must appear. */

@@ -847,6 +847,10 @@ export const SITUATIONS: Situation[] = [
         hi: 'बिना रसीद नकद जुर्माना माँगना। मौके पर जुर्माना केवल सहायक उप निरीक्षक या उससे ऊपर का अधिकारी ही ले सकता है।',
       },
       { en: 'Arrest you for an ordinary traffic offence that is compoundable.', hi: 'सामान्य समझौता योग्य यातायात अपराध पर आपको गिरफ़्तार करना।' },
+      {
+        en: 'Let an illegal modification pass — a loud exhaust, bull bars, extra lamps or dark window film can be fined and stripped off on the spot, so do not fit them in the first place.',
+        hi: 'अवैध मॉडिफ़िकेशन को छोड़ देना — तेज़ आवाज़ वाला एग्ज़ॉस्ट, बुल बार, अतिरिक्त लाइटें या गहरी फ़िल्म पर जुर्माना लगता है और मौके पर ही हटा दी जाती है, इसलिए इन्हें लगवाएँ ही नहीं।',
+      },
     ],
     steps: [
       { en: 'Pull over safely, stay in the vehicle if asked, and be courteous. Arguing costs more time than the challan.', hi: 'सुरक्षित जगह रोकें, कहा जाए तो वाहन में ही रहें, और शिष्ट रहें। बहस चालान से ज़्यादा समय ले लेती है।' },

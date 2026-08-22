@@ -1069,6 +1069,18 @@ export const ACTS: Act[] = [
         en: 'Hit-and-run compensation is payable by the government even when the vehicle is never traced.',
         hi: 'हिट-एंड-रन का मुआवज़ा सरकार देती है, चाहे वाहन कभी पकड़ा ही न जाए।',
       },
+      {
+        en: 'Section 52 — you may not alter or modify a car or bike so that it no longer matches what the registration certificate says. Structural changes, a louder aftermarket exhaust or silencer, bull bars, extra lamps, or a colour change without endorsement are all illegal.',
+        hi: 'धारा 52 — आप कार या बाइक में ऐसा बदलाव नहीं कर सकते जिससे वह पंजीयन प्रमाणपत्र से मेल न खाए। ढाँचे में बदलाव, तेज़ आवाज़ वाला आफ़्टरमार्केट एग्ज़ॉस्ट या साइलेंसर, बुल बार, अतिरिक्त लाइटें, या बिना पृष्ठांकन रंग बदलना — सब अवैध हैं।',
+      },
+      {
+        en: 'Three modifications are allowed: a retro-fitment approved by the manufacturer or a test agency, a CNG or LPG kit with approval, and any change that lets a person with a disability drive or travel.',
+        hi: 'तीन तरह के बदलाव जायज़ हैं: निर्माता या परीक्षण एजेंसी से स्वीकृत रेट्रो-फ़िटमेंट, अनुमोदन सहित CNG या LPG किट, और ऐसा कोई भी बदलाव जिससे दिव्यांग व्यक्ति गाड़ी चला या उसमें सफ़र कर सके।',
+      },
+      {
+        en: 'Window tint is capped by the Supreme Court: at least 70% visibility through the windscreen and front side glass, and 50% through the rear. Dark films beyond that are removed on the spot.',
+        hi: 'खिड़की की फ़िल्म पर सुप्रीम कोर्ट की सीमा है: विंडस्क्रीन और आगे के साइड शीशों से कम से कम 70% और पीछे के शीशे से 50% दृश्यता ज़रूरी। इससे गहरी फ़िल्म मौके पर ही हटा दी जाती है।',
+      },
     ],
     useIt: [
       {
@@ -1078,6 +1090,10 @@ export const ACTS: Act[] = [
       {
         en: 'After an accident, get the FIR and the medical records — a MACT claim is built on those two papers.',
         hi: 'दुर्घटना के बाद FIR और चिकित्सा रिकॉर्ड लें — MACT का दावा इन्हीं दो कागज़ों पर खड़ा होता है।',
+      },
+      {
+        en: 'Before modifying a vehicle, ask the RTO what needs endorsing on the registration certificate. An unapproved modification also gives your insurer a reason to reject a claim.',
+        hi: 'वाहन में बदलाव से पहले RTO से पूछें कि पंजीयन प्रमाणपत्र में क्या दर्ज कराना होगा। बिना स्वीकृति का बदलाव बीमा कंपनी को दावा खारिज करने का बहाना भी दे देता है।',
       },
     ],
     situations: ['traffic', 'health'],
