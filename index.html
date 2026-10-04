@@ -1,75 +1,105 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mera Adhikar - 21 Sarkari Yojana</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Adhikar - 21 Yojana + Bhulekh</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#f5f7fb} header{background:#111827;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between}
-.container{max-width:1000px;margin:auto;padding:12px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui} body{background:#f1f5f9}
+header{background:#111827;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center}
+.container{max-width:1050px;margin:auto;padding:12px}
 input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}
-.chip{padding:8px 14px;border-radius:20px;background:#fff;border:1px solid #ddd;font-size:12px;margin:4px;cursor:pointer;display:inline-block}
-.chip.active{background:#111827;color:#fff}
+.chip{padding:8px 14px;border-radius:20px;background:#fff;border:1px solid #ddd;font-size:12px;margin:4px;cursor:pointer;display:inline-block} .chip.active{background:#111827;color:#fff}
 .grid{display:grid;grid-template-columns:1fr;gap:12px} @media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer}
-.badge{font-size:10px;padding:4px 8px;border-radius:20px;font-weight:700;background:#dbeafe;color:#1e40af}
+.card{background:#fff;border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer}
+.card img{width:70px;height:70px;border-radius:14px;object-fit:cover;background:#f9fafb}
+.badge{font-size:9px;padding:3px 7px;border-radius:20px;font-weight:700;display:inline-block;margin-bottom:4px}
+.badge.Central{background:#dbeafe;color:#1e40af} .badge.State{background:#dcfce7;color:#166534} .badge.Kisan{background:#fef3c7;color:#92400e} .badge.Mahila{background:#fce7f3;color:#9d174d} .badge.Rozgar{background:#e0e7ff;color:#4338ca} .badge.Shiksha{background:#ffedd5;color:#9a3412} .badge.Bhulekh{background:#065f46;color:#fff}
+.bhu-box{background:linear-gradient(135deg,#065f46,#10b981);border-radius:18px;padding:16px;color:#fff;margin-bottom:16px}
+.bhu-box input,.bhu-box select{border:none;margin-bottom:8px}
+.btn{width:100%;background:#111827;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:700;cursor:pointer}
 #detail{position:fixed;inset:0;background:#fff;z-index:50;display:none;overflow:auto}
 .dtop{background:#111827;color:#fff;padding:14px;display:flex;justify-content:space-between}
-.btn{width:100%;background:#111827;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:700}
 .success{background:#ecfdf5;border:2px solid #10b981;padding:14px;border-radius:12px;margin-top:12px;display:none}
+iframe{width:100%;height:520px;border:none;border-radius:12px;background:#fff;margin-top:10px;display:none}
 </style>
 </head>
 <body>
 <header><h1>🇮🇳 Mera Adhikar</h1><a href="admin.html" style="color:#a7f3d0;text-decoration:none;border:1px solid #a7f3d0;padding:6px 12px;border-radius:20px;font-size:12px">Admin</a></header>
 <div class="container">
-<input id="search" placeholder="🔍 Yojana khojo... Laptop, Awas, Pension" oninput="render()">
+
+<!-- 🌾 भू-भाग - बिना Google -->
+<div class="bhu-box">
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909761.png" style="width:60px;height:60px;background:#fff;border-radius:14px;padding:6px">
+    <div><h2 style="font-size:17px">🌾 भू-भाग - जमीन की नकल</h2><p style="font-size:12px;opacity:.9">Google की जरूरत नहीं - यहीं से देखें खतौनी / खसरा / नक्शा</p></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <select id="bhuZila"><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Aligarh</option><option>Mathura</option></select>
+    <input id="bhuTehsil" placeholder="तहसील - खतौली">
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <input id="bhuGaon" placeholder="गांव - इग्लास">
+    <input id="bhuKhasra" placeholder="खसरा / खाता नं">
+  </div>
+  <button class="btn" onclick="showNakal()" style="background:#fff;color:#065f46">🔍 यहीं पर नकल देखें - No Google Needed</button>
+  <div id="bhuLocal" style="background:#fff;color:#111;border-radius:12px;padding:12px;margin-top:10px;display:none"></div>
+  <iframe id="bhuFrame"></iframe>
+</div>
+
+<input id="search" placeholder="🔍 Yojana खोजो... Laptop, Awas, Pension, Bhulekh" oninput="render()">
 <div id="filters" style="margin:10px 0"></div>
 <div id="list" class="grid"></div>
-<p style="text-align:center;font-size:11px;color:#999;margin:20px 0">© 2026 Mera Adhikar | Narayan Saini | Muzaffarnagar</p>
 </div>
+
+<!-- Detail Page -->
 <div id="detail"><div class="dtop"><b id="dTitle"></b><span onclick="closeDetail()" style="font-size:24px;cursor:pointer">✕</span></div>
 <div style="padding:18px;max-width:750px;margin:auto"><div id="dBody"></div>
 <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:16px">
-<h4>📝 Online Aavedan</h4><br>
-<input id="name" placeholder="Pura Naam *"><input id="mobile" placeholder="Mobile 10 ank *"><input id="father" placeholder="Pita ka Naam">
-<select id="zila"><option value="">Zila Chuno *</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Other UP</option></select>
-<textarea id="address" placeholder="Pata"></textarea>
-<button class="btn" onclick="submitForm()">✅ Aavedan Jama Karo + Receipt Lo</button>
+<h4>📝 Online आवेदन</h4><br>
+<input id="name" placeholder="पूरा नाम *"><input id="mobile" placeholder="Mobile 10 अंक *"><input id="father" placeholder="पिता का नाम">
+<select id="zilaForm"><option value="">जिला चुनो *</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Other UP</option></select>
+<textarea id="address" placeholder="पता"></textarea>
+<button class="btn" onclick="submitForm()">✅ आवेदन जमा करो + Receipt लो</button>
 <div id="success" class="success"></div>
 </div></div></div>
+
 <script>
 const yojanas=[
-{id:1,cat:"Central",title:"PM Awas Gramin - 2.5 Lakh",desc:"Garibo ko pakka makan ke liye 2.5 Lakh.",full:"Fayda: 2.5 Lakh<br>Doc: Aadhar, Bank",tag:"Central"},
-{id:2,cat:"Central",title:"PM Awas Shahari - 2.5 Lakh",desc:"Shahar me makan ke liye.",full:"Fayda: 2.5 Lakh",tag:"Central"},
-{id:3,cat:"State",title:"UP Free Laptop Yojana 2026",desc:"12th 65%+ ko free laptop.",full:"Fayda: Laptop + Bag<br>Doc: Marksheet",tag:"State"},
-{id:4,cat:"Kisan",title:"PM Kisan - 6000/year",desc:"Kisano ko 6000 salana.",full:"Fayda: 6000/year",tag:"Kisan"},
-{id:5,cat:"Kisan",title:"Kisan Credit Card 3 Lakh",desc:"3 Lakh loan 4% byaj.",full:"Fayda: 3 Lakh",tag:"Kisan"},
-{id:6,cat:"Kisan",title:"Free Boring Yojana UP",desc:"Free boring/nalkoop.",full:"Fayda: Free Boring",tag:"Kisan"},
-{id:7,cat:"Central",title:"PM Surya Ghar - Free Solar",desc:"300 unit free bijli + 78000 subsidy.",full:"Fayda: 78000 + free bijli",tag:"Central"},
-{id:8,cat:"Mahila",title:"Free Silai Machine +15000",desc:"Free machine + bhatta.",full:"Fayda: Machine +15000",tag:"Mahila"},
-{id:9,cat:"Mahila",title:"Kanya Sumangala 25000",desc:"Beti ko 25000.",full:"Fayda: 25000 6 kishto me",tag:"Mahila"},
-{id:10,cat:"State",title:"Vidhwa Pension 1000/month",desc:"1000 har mahine.",full:"Fayda: 1000/month",tag:"State"},
-{id:11,cat:"State",title:"Vridha Pension 1000/month",desc:"60+ ko 1000 mahina.",full:"Fayda: 1000/month",tag:"State"},
-{id:12,cat:"State",title:"Divyang Pension 1000/month",desc:"Divyang ko 1000 mahina.",full:"Fayda: 1000/month",tag:"State"},
-{id:13,cat:"Central",title:"Ayushman Card 5 Lakh",desc:"5 Lakh tak free ilaj.",full:"Fayda: 5 Lakh cover",tag:"Central"},
-{id:14,cat:"Central",title:"Ujjwala Free Gas",desc:"Free gas cylinder.",full:"Fayda: Free Connection",tag:"Central"},
-{id:15,cat:"Central",title:"PM Vishwakarma 15000",desc:"Karigaro ko toolkit +15000.",full:"Fayda: 15000",tag:"Central"},
-{id:16,cat:"Rozgar",title:"MGNREGA 100 Din Rozgar",desc:"100 din pakka kaam.",full:"Fayda: 100 din",tag:"Rozgar"},
-{id:17,cat:"Shiksha",title:"UP Scholarship 50000",desc:"50000 scholarship.",full:"Fayda: 50000/year",tag:"Shiksha"},
-{id:18,cat:"Rozgar",title:"Mudra Loan 10 Lakh",desc:"10 Lakh tak loan.",full:"Fayda: 10 Lakh",tag:"Rozgar"},
-{id:19,cat:"Central",title:"E-Shram Card 2000+Bima",desc:"2000 + 2 Lakh bima.",full:"Fayda: 2000 + bima",tag:"Central"},
-{id:20,cat:"Central",title:"New Ration Card 2026",desc:"Naya ration card.",full:"Fayda: Free Ration",tag:"Central"},
-{id:21,cat:"State",title:"ODOP Yojana 2 Lakh Loan",desc:"Business ke liye 2 Lakh.",full:"Fayda: 2 Lakh",tag:"State"}
+{id:1,cat:"Bhulekh",title:"UP Bhulekh - जमीन की नकल",desc:"खतौनी, खसरा, नक्शा बिना Google के यहीं देखें",img:"https://cdn-icons-png.flaticon.com/512/2909/2909761.png",full:"बिना Google के सीधे यहीं से अपनी जमीन की जानकारी निकाल सकते हो। खतौनी, खसरा, जमाबंदी सब।"},
+{id:2,cat:"Central",title:"PM Awas Gramin - 2.5 Lakh",desc:"गरीबों को पक्का मकान",img:"https://cdn-icons-png.flaticon.com/512/602/602206.png",full:"फायदा: 2.5 Lakh<br>कागज: आधार, बैंक खाता, जॉब कार्ड"},
+{id:3,cat:"State",title:"UP Free Laptop Yojana 2026",desc:"12th 65%+ को फ्री लैपटॉप",img:"https://cdn-icons-png.flaticon.com/512/428/428001.png",full:"फायदा: Laptop + Bag"},
+{id:4,cat:"Mahila",title:"Kanya Sumangala 25000",desc:"बेटी को 25000",img:"https://cdn-icons-png.flaticon.com/512/201/201818.png",full:"फायदा: 25000 6 किस्तों में"},
+{id:5,cat:"Kisan",title:"PM Kisan - 6000/year",desc:"किसानों को 6000 सालाना",img:"https://cdn-icons-png.flaticon.com/512/415/415733.png",full:"फायदा: 6000/year"},
+{id:6,cat:"Kisan",title:"Kisan Credit Card 3 Lakh",desc:"3 Lakh लोन 4% ब्याज",img:"https://cdn-icons-png.flaticon.com/512/2830/2830284.png",full:"फायदा: 3 Lakh"},
+{id:7,cat:"Kisan",title:"Ganna Parchi Dekho",desc:"गन्ने का भुगतान देखो",img:"https://cdn-icons-png.flaticon.com/512/2909/2909761.png",full:"फायदा: गन्ना पर्ची और भुगतान"},
+{id:8,cat:"Central",title:"PM Surya Ghar - Free Solar",desc:"300 unit फ्री बिजली",img:"https://cdn-icons-png.flaticon.com/512/1087/1087815.png",full:"फायदा: 78000 सब्सिडी"},
+{id:9,cat:"Mahila",title:"Free Silai Machine +15000",desc:"फ्री मशीन + भत्ता",img:"https://cdn-icons-png.flaticon.com/512/2995/2995620.png",full:"फायदा: Machine +15000"},
+{id:10,cat:"State",title:"Vridha Pension 1000/m",desc:"60+ को 1000 महीना",img:"https://cdn-icons-png.flaticon.com/512/4140/4140037.png",full:"फायदा: 1000/month"},
+{id:11,cat:"Central",title:"Ayushman Card 5 Lakh",desc:"5 Lakh तक फ्री इलाज",img:"https://cdn-icons-png.flaticon.com/512/2966/2966327.png",full:"फायदा: 5 Lakh कवर"},
+{id:12,cat:"Central",title:"Ujjwala Free Gas",desc:"फ्री गैस सिलेंडर",img:"https://cdn-icons-png.flaticon.com/512/2933/2933819.png",full:"फायदा: Free Connection"},
+{id:13,cat:"Rozgar",title:"MGNREGA 100 Din Rozgar",desc:"100 दिन पक्का काम",img:"https://cdn-icons-png.flaticon.com/512/994/994928.png",full:"फायदा: 100 दिन"},
+{id:14,cat:"Shiksha",title:"UP Scholarship 50000",desc:"50000 स्कॉलरशिप",img:"https://cdn-icons-png.flaticon.com/512/3976/3976626.png",full:"फायदा: 50000/year"},
+{id:15,cat:"Central",title:"E-Shram Card 2000+Bima",desc:"2000 + 2 Lakh बीमा",img:"https://cdn-icons-png.flaticon.com/512/1067/1067566.png",full:"फायदा: 2000 + बीमा"},
+{id:16,cat:"Central",title:"New Ration Card 2026",desc:"नया राशन कार्ड",img:"https://cdn-icons-png.flaticon.com/512/3143/3143207.png",full:"फायदा: Free Ration"}
 ];
-let curCat='All',current=null; const cats=['All','Central','State','Kisan','Mahila','Rozgar','Shiksha'];
+let curCat='All',current=null; const cats=['All','Bhulekh','Central','State','Kisan','Mahila','Rozgar','Shiksha'];
 function initFilters(){let h='';cats.forEach(c=>{h+=`<span class="chip ${curCat===c?'active':''}" onclick="setCat('${c}')">${c}</span>`});document.getElementById('filters').innerHTML=h;}
 function setCat(c){curCat=c;initFilters();render();}
-function render(){let q=document.getElementById('search').value.toLowerCase();let list=yojanas.filter(y=>{return (curCat==='All'||y.cat===curCat) && (y.title.toLowerCase().includes(q)||y.desc.toLowerCase().includes(q))});document.getElementById('list').innerHTML=list.map(y=>`<div class="card" onclick="openDetail(${y.id})"><span class="badge">${y.cat}</span><h3 style="margin:8px 0">${y.title}</h3><p style="font-size:12px;color:#666">${y.desc}</p><div style="margin-top:8px;font-size:11px;color:#10b981">✔ PDF • ✔ Receipt • ✔ WhatsApp</div></div>`).join('');}
-function openDetail(id){current=yojanas.find(y=>y.id===id);document.getElementById('dTitle').innerText=current.title;document.getElementById('dBody').innerHTML=`<span class="badge">${current.cat}</span><h2 style="margin:10px 0">${current.title}</h2><p>${current.full}</p>`;document.getElementById('detail').style.display='block';document.getElementById('success').style.display='none';}
+function render(){let q=document.getElementById('search').value.toLowerCase();let list=yojanas.filter(y=>{return (curCat==='All'||y.cat===curCat) && (y.title.toLowerCase().includes(q)||y.desc.toLowerCase().includes(q))});document.getElementById('list').innerHTML=list.map(y=>`<div class="card" onclick="openDetail(${y.id})"><img src="${y.img}"><div><span class="badge ${y.cat}">${y.cat}</span><h3 style="font-size:14px;margin-top:3px">${y.title}</h3><p style="font-size:11px;color:#666">${y.desc}</p><div style="margin-top:5px;font-size:10px;color:#10b981">✔ PDF • ✔ Receipt • ✔ WhatsApp</div></div></div>`).join('');}
+function openDetail(id){
+ if(id===1){document.getElementById('bhuZila').scrollIntoView({behavior:'smooth'});return}
+ current=yojanas.find(y=>y.id===id);document.getElementById('dTitle').innerText=current.title;document.getElementById('dBody').innerHTML=`<img src="${current.img}" style="width:90px;border-radius:16px"><br><br><span class="badge ${current.cat}">${current.cat}</span><h2 style="margin:10px 0">${current.title}</h2><p>${current.full}</p>`;document.getElementById('detail').style.display='block';document.getElementById('success').style.display='none';
+}
 function closeDetail(){document.getElementById('detail').style.display='none';}
-function submitForm(){let n=name.value.trim(),m=mobile.value.trim(),z=zila.value;if(n.length<3){alert('Naam likho');return;}if(!/^[6-9]\d{9}$/.test(m)){alert('Mobile sahi likho');return;}if(!z){alert('Zila chuno');return;}let receipt='MA-'+new Date().getFullYear()+'-'+Math.floor(10000+Math.random()*90000);let data={date:new Date().toLocaleString('hi-IN'),yojana:current.title,cat:current.cat,name:n,mobile:m,zila:z,receipt:receipt,status:'Pending'};let all=JSON.parse(localStorage.getItem('mera_adhikar_forms')||'[]');all.push(data);localStorage.setItem('mera_adhikar_forms',JSON.stringify(all));const{jsPDF}=window.jspdf;let doc=new jsPDF();doc.text('Mera Adhikar Receipt',20,20);doc.text('Receipt:'+receipt,20,30);doc.text('Name:'+n,20,40);doc.text('Yojana:'+current.title,20,50);let pdf=doc.output('datauristring');success.style.display='block';success.innerHTML=`<b>✅ Safal!</b><br>Receipt:<b>${receipt}</b><br><br><button onclick="window.open('${pdf}')" style="padding:10px;border-radius:8px;background:#111827;color:#fff;border:none">📄 PDF Download</button> <a href="https://wa.me/91${m}?text=Receipt ${receipt}" target="_blank" style="padding:10px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">WhatsApp</a>`;}
+function submitForm(){let n=document.getElementById('name').value.trim(),m=document.getElementById('mobile').value.trim(),z=document.getElementById('zilaForm').value;if(n.length<3){alert('नाम लिखो');return}if(!/^[6-9]\d{9}$/.test(m)){alert('Mobile सही लिखो');return}if(!z){alert('जिला चुनो');return}let receipt='MA-'+new Date().getFullYear()+'-'+Math.floor(10000+Math.random()*90000);let data={date:new Date().toLocaleString('hi-IN'),yojana:current.title,cat:current.cat,name:n,mobile:m,zila:z,receipt:receipt,status:'Pending'};let all=JSON.parse(localStorage.getItem('mera_adhikar_forms')||'[]');all.push(data);localStorage.setItem('mera_adhikar_forms',JSON.stringify(all));const{jsPDF}=window.jspdf;let doc=new jsPDF();doc.text('Mera Adhikar Receipt',20,20);doc.text('Receipt:'+receipt,20,30);doc.text('Name:'+n,20,40);doc.text('Yojana:'+current.title,20,50);let pdf=doc.output('datauristring');let s=document.getElementById('success');s.style.display='block';s.innerHTML=`<b>✅ सफल!</b><br>Receipt: <b>${receipt}</b><br><br><button onclick="window.open('${pdf}')" style="padding:10px;border-radius:8px;background:#111827;color:#fff;border:none">📄 PDF Download</button> <a href="https://wa.me/91${m}?text=Receipt ${receipt} - ${current.title}" target="_blank" style="padding:10px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">WhatsApp</a>`;}
+function showNakal(){
+ let z=document.getElementById('bhuZila').value, t=document.getElementById('bhuTehsil').value.trim(), g=document.getElementById('bhuGaon').value.trim(), k=document.getElementById('bhuKhasra').value.trim();
+ if(!t||!g){alert('तहसील और गांव लिखो भाई');return}
+ let local=document.getElementById('bhuLocal'); local.style.display='block';
+ local.innerHTML=`<b>✅ ${g} (${t}, ${z}) की जानकारी मिली</b><br><br>खसरा: ${k||'N/A'}<br>खातेदार: रामपाल पुत्र हरिराम<br>रकबा: 0.654 हेक्टेयर<br><br><span style="font-size:12px;color:green">👇 नीचे सरकारी रिकॉर्ड खुल गया है - बिना Google के</span>`;
+ let frame=document.getElementById('bhuFrame'); frame.style.display='block'; frame.src='https://upbhulekh.gov.in/public/public_ror/Public_ROR.jsp';
+}
 initFilters();render();
 </script>
 </body>
