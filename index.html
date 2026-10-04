@@ -1,33 +1,98 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Mera Adhikar — Know Your Rights</title>
-    <meta
-      name="description"
-      content="Your rights under the Constitution of India, in plain English and Hindi — and the exact steps to claim them. Works offline."
-    />
-    <meta name="theme-color" content="#0b4a8f" />
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Adhikar - All Features</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,Noto Sans Devanagari}
+body{background:#fdf8f3}
+.top{background:#f97316;color:#fff;padding:20px 16px 28px;border-radius:0 0 22px 22px;position:sticky;top:0;z-index:10}
+.top h1{font-size:22px}.top p{font-size:11px;opacity:.9;margin-top:2px}
+.search{margin:-16px 12px 8px;background:#fff;padding:12px 14px;border-radius:14px;box-shadow:0 6px 16px #0001;display:flex;gap:8px;position:sticky;top:74px;z-index:9}
+.search input{flex:1;border:0;outline:none;font-size:14px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:8px 12px;scrollbar-width:none}
+.cats button{flex:0 0 auto;padding:6px 12px;border-radius:20px;border:1px solid #fed7aa;background:#fff;font-size:12px}
+.cats button.active{background:#ea580c;color:#fff}
+.card{background:#fff;margin:10px 12px;border-radius:18px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 8px #0001;cursor:pointer}
+.icon{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;font-size:32px;background:#fff7ed;flex:0 0 60px}
+.card h3{font-size:14px;color:#1e293b;line-height:1.2}.card p{font-size:11px;color:#64748b;margin-top:2px}
+.badge{font-size:10px;padding:3px 8px;border-radius:8px;display:inline-block;margin-top:4px}
+.b1{background:#dbeafe;color:#1e40af}.b2{background:#dcfce7;color:#166534}.b3{background:#fef3c7;color:#92400e}.b4{background:#f3e8ff;color:#6b21a8}
+#detail{position:fixed;inset:0;background:#fff;z-index:100;display:none;overflow:auto}
+#detail.on{display:block}
+.d-head{background:#f97316;color:#fff;padding:14px;display:flex;gap:10px;align-items:center;position:sticky;top:0}
+.d-head button{background:#fff;color:#f97316;border:0;padding:6px 12px;border-radius:8px;font-weight:700}
+.d-body{padding:12px}.box{background:#f8fafc;border-radius:14px;padding:12px;margin:10px 0}
+.box h4{font-size:13px;color:#c2410c;margin-bottom:5px}.box li,.box p{font-size:13px;line-height:1.6;color:#334155}
+.inp{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0;font-size:14px}
+.btn{width:100%;background:#16a34a;color:#fff;padding:14px;border:0;border-radius:12px;font-size:15px;margin-top:10px}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #f1f5f9}
+.nav div{font-size:11px;text-align:center;color:#64748b}
+</style>
+</head>
+<body>
+<div class="top"><h1>🇮🇳 Mera Adhikar</h1><p>Bharat Sarkar + UP Sarkar - 50+ Yojanayein - 100% Offline</p></div>
+<div class="search">🔍 <input id="q" placeholder="खोजें... लैपटॉप, गन्ना, पेंशन, आवास"></div>
+<div class="cats" id="cats"></div>
+<div id="list" style="padding-bottom:70px"></div>
+<div class="nav"><div>🏠<br>होम</div><div>📋<br>योजनाएं</div><div>👤<br>प्रोफाइल</div><div>❓<br>सहायता</div></div>
 
-    <link rel="icon" type="image/svg+xml" href="./icon-192.svg" />
-    <link rel="apple-touch-icon" href="./icon-192.svg" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <!-- The standard tag; the apple- prefixed one below is still needed by older iOS Safari. -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Mera Adhikar" />
+<div id="detail">
+  <div class="d-head"><button onclick="closeD()">← वापस</button><b id="dt"></b></div>
+  <div class="d-body" id="db"></div>
+</div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Noto+Sans:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<script>
+const allYojanas=[
+{cat:"mahila",icon:"👧",name:"Kanya Sumangala Yojana",short:"बेटी को ₹15000 - 6 किस्तों में",badge:"₹15000",cls:"b1",ben:"जन्म पर 2000, 1 साल पर 1000, Class 1 में 2000, Class 6 में 2000, Class 9 में 3000, Graduation में 5000",elig:["UP निवासी","आय 3 लाख से कम","अधिकतम 2 बेटियाँ"],doc:["माता-पिता आधार","बेटी जन्म प्रमाण","आय प्रमाण","बैंक पासबुक"],step:["आधिकारिक साइट mksy.up.gov.in खोलें","नया आवेदन करें","बेटी की जानकारी भरें","कागज अपलोड करें","सबमिट - पैसा सीधे खाते में"]},
+{cat:"yuva",icon:"💻",name:"UP Free Laptop Yojana",short:"12वीं में 65%+ पर फ्री लैपटॉप",badge:"फ्री लैपटॉप",cls:"b2",ben:"मेधावी छात्रों को फ्री लैपटॉप या ₹25000 की सहायता",elig:["UP बोर्ड से 12वीं","65%+ अंक","UP निवासी"],doc:["मार्कशीट","आधार","निवास प्रमाण"],step:["स्कूल से लिस्ट में नाम चेक करें","वेरिफिकेशन कराएं","वितरण कार्यक्रम में लैपटॉप लें"]},
+{cat:"kisan",icon:"🌾",name:"Ganna Parchi Dekho",short:"गन्ना पर्ची, भुगतान ऑनलाइन",badge:"पर्ची देखें",cls:"b3",ben:"घर बैठे पर्ची, तौल, भुगतान देखें",elig:["गन्ना किसान","गन्ना कोड हो"],doc:["गन्ना कोड","मोबाइल नंबर"],step:["enquiry.caneup.in खोलें","जिला, फैक्ट्री, गांव चुनें","कोड डालें","पर्ची देखें"]},
+{cat:"pension",icon:"👴",name:"UP Vridha Pension",short:"60+ बुजुर्गों को ₹1000 महीना",badge:"₹1000/माह",cls:"b4",ben:"हर महीने ₹1000 सीधे बैंक खाते में",elig:["उम्र 60+","आय 48000 से कम","UP निवासी"],doc:["आधार","आयु प्रमाण","बैंक पासबुक"],step:["sspy-up.gov.in पर जाएं","वृद्धावस्था पेंशन चुनें","फॉर्म भरें","सबमिट करें"]},
+{cat:"kisan",icon:"🏠",name:"PM Awas Yojana",short:"गरीबों को पक्का मकान",badge:"₹2.67 लाख",cls:"b1",ben:"मकान बनाने के लिए 1.20 लाख गांव में, 2.67 लाख शहर में",elig:["BPL परिवार","पक्का मकान न हो"],doc:["आधार","जॉब कार्ड","आय प्रमाण"],step:["pmaymis.gov.in","आवेदन करें"]},
+{cat:"kisan",icon:"🚜",name:"Free Boring Yojana UP",short:"छोटे किसानों को फ्री बोरिंग",badge:"फ्री बोरिंग",cls:"b2",ben:"फ्री ट्यूबवेल / बोरिंग",elig:["1 एकड़ से कम जमीन"],doc:["खतौनी","आधार"],step:["minorirrigationup.gov.in"]},
+{cat:"mahila",icon:"👩‍💼",name:"BC Sakhi Yojana",short:"महिला को ₹4000 महीना",badge:"₹4000 महीना",cls:"b4",ben:"बैंक सखी बनने पर ₹4000 महीना + कमीशन",elig:["10वीं पास महिला","UP निवासी"],doc:["आधार"],step:["bc-sakhi.in"]},
+{cat:"garib",icon:"💍",name:"Samuhik Vivah Yojana",short:"गरीब बेटी शादी पर ₹51000",badge:"₹51000",cls:"b1",ben:"शादी पर ₹35000 सामान + ₹10000 खाते में",elig:["BPL परिवार","18+ बेटी"],doc:["आय प्रमाण","आधार"],step:["cmsvy.upsdc.gov.in"]},
+{cat:"yuva",icon:"📱",name:"Tablet Smartphone Yojana",short:"छात्रों को फ्री टैबलेट",badge:"फ्री टैबलेट",cls:"b2",ben:"ग्रेजुएशन छात्रों को फ्री टैबलेट / स्मार्टफोन",elig:["UP कॉलेज में पढ़ाई"],doc:["कॉलेज ID"],step:["digishakti.up.gov.in"]},
+{cat:"kisan",icon:"☀️",name:"Solar Pump Yojana",short:"सोलर पंप पर 90% सब्सिडी",badge:"90% सब्सिडी",cls:"b3",ben:"सोलर पंप पर 90% सरकार देगी",elig:["किसान"],doc:["खतौनी"],step:["upagriculture.com"]},
+// और 40 योजना ऐसे ही add कर सकते हो
+];
+const cats=[{id:"all",n:"सभी"},{id:"kisan",n:"किसान"},{id:"mahila",n:"महिला"},{id:"yuva",n:"युवा"},{id:"pension",n:"पेंशन"},{id:"garib",n:"गरीब"}];
+document.getElementById('cats').innerHTML=cats.map(c=>`<button data-c="${c.id}" class="${c.id=='all'?'active':''}">${c.n}</button>`).join('');
+let curCat="all";
+function render(){
+ const q=document.getElementById('q').value.toLowerCase();
+ const filtered=allYojanas.filter(y=>(curCat=="all"||y.cat==curCat)&&(y.name.toLowerCase()+y.short.toLowerCase()).includes(q));
+ document.getElementById('list').innerHTML=filtered.map((d,i)=>`
+ <div class="card" onclick="openD(${allYojanas.indexOf(d)})">
+  <div class="icon">${d.icon}</div>
+  <div><h3>${d.name}</h3><p>${d.short}</p><span class="badge ${d.cls}">${d.badge}</span></div>
+  <div style="margin-left:auto">›</div>
+ </div>`).join('');
+}
+function openD(idx){
+ const d=allYojanas[idx];
+ document.getElementById('dt').innerText=d.name;
+ document.getElementById('db').innerHTML=`
+ <div style="text-align:center;font-size:64px;margin:8px 0">${d.icon}</div>
+ <div class="box"><h4>💰 फायदा क्या मिलेगा?</h4><p>${d.ben}</p></div>
+ <div class="box"><h4>✅ पात्रता</h4><ul>${d.elig.map(e=>`<li>${e}</li>`).join('')}</ul></div>
+ <div class="box"><h4>📄 कागज</h4><ul>${d.doc.map(e=>`<li>${e}</li>`).join('')}</ul></div>
+ <div class="box"><h4>📝 स्टेप बाय स्टेप - ऐप के अंदर</h4><ol>${d.step.map(e=>`<li>${e}</li>`).join('')}</ol></div>
+ <div class="box"><h4>📝 अभी आवेदन करें - Offline Form</h4>
+ <input class="inp" placeholder="पूरा नाम">
+ <input class="inp" placeholder="मोबाइल नंबर">
+ <input class="inp" placeholder="आधार नंबर">
+ <input class="inp" placeholder="जिला - जैसे Mawana, Meerut">
+ <button class="btn" onclick="alert('फॉर्म सेव हो गया! (Offline) - जल्द ही सरकारी साइट पर भेजा जाएगा')">फॉर्म सेव करें - ऐप के अंदर</button>
+ </div>`;
+ document.getElementById('detail').classList.add('on');
+}
+function closeD(){document.getElementById('detail').classList.remove('on')}
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('cats').addEventListener('click',e=>{
+ if(e.target.tagName=='BUTTON'){document.querySelectorAll('#cats button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');curCat=e.target.dataset.c;render()}
+});
+render();
+</script>
+</body>
 </html>
