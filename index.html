@@ -1,33 +1,106 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Mera Adhikar — Know Your Rights</title>
-    <meta
-      name="description"
-      content="Your rights under the Constitution of India, in plain English and Hindi — and the exact steps to claim them. Works offline."
-    />
-    <meta name="theme-color" content="#0b4a8f" />
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mera Adhikar - Sarkari Yojana Portal</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#f5f7fb} header{background:#111827;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:50;display:flex;justify-content:space-between}
+.container{max-width:1000px;margin:0 auto;padding:12px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.toolbar input{flex:1;min-width:200px;padding:12px;border-radius:12px;border:1px solid #ddd}
+.chip{padding:8px 14px;border-radius:20px;background:#fff;border:1px solid #e5e7eb;font-size:12px;cursor:pointer}
+.chip.active{background:#111827;color:#fff}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 20px rgba(0,0,0,.05);cursor:pointer;border:1px solid #eee}
+.card h3{font-size:15px;margin:8px 0} .card p{font-size:12px;color:#6b7280}
+.badge{font-size:10px;padding:4px 8px;border-radius:20px;font-weight:700;display:inline-block}
+.b-central{background:#dbeafe;color:#1e40af} .b-state{background:#dcfce7;color:#166534} .b-kisan{background:#fef3c7;color:#92400e}
+#detail{position:fixed;inset:0;background:#fff;z-index:100;overflow:auto;display:none}
+.dtop{background:#111827;color:#fff;padding:14px;display:flex;justify-content:space-between}
+.form{background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:16px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d1d5db;border-radius:10px;margin-bottom:10px;font-size:14px}
+.btn{width:100%;background:#111827;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:700;cursor:pointer}
+.success{background:#ecfdf5;border:2px solid #10b981;padding:14px;border-radius:12px;margin-top:14px;display:none}
+</style>
+</head>
+<body>
+<header><h1>🇮🇳 Mera Adhikar</h1><a href="admin.html" style="color:#a7f3d0;text-decoration:none;border:1px solid #a7f3d0;padding:6px 12px;border-radius:20px;font-size:12px">Admin</a></header>
+<div class="container">
+<input id="search" placeholder="🔍 Yojana khojo... Laptop, Awas, Kisan, Pension" oninput="render()" style="width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;margin:12px 0">
+<div class="toolbar" id="filters"></div>
+<div id="list" class="grid"></div>
+</div>
 
-    <link rel="icon" type="image/svg+xml" href="./icon-192.svg" />
-    <link rel="apple-touch-icon" href="./icon-192.svg" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <!-- The standard tag; the apple- prefixed one below is still needed by older iOS Safari. -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Mera Adhikar" />
+<div id="detail">
+<div class="dtop"><b id="dTitle"></b><span onclick="closeDetail()" style="font-size:24px;cursor:pointer">✕</span></div>
+<div style="padding:18px;max-width:750px;margin:0 auto">
+<div id="dBody"></div>
+<div class="form">
+<h4>📝 Online Aavedan Form</h4>
+<input id="name" placeholder="Pura Naam *">
+<input id="mobile" placeholder="Mobile 10 ank *">
+<input id="father" placeholder="Pita ka Naam">
+<select id="zila"><option value="">Zila Chuno *</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Other UP</option></select>
+<textarea id="address" placeholder="Pura Pata"></textarea>
+<button class="btn" onclick="submitForm()">✅ Aavedan Jama Karo</button>
+<div id="success" class="success"></div>
+</div>
+</div>
+</div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&family=Noto+Sans:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<script>
+const yojanas=[
+{id:1,cat:"Central",title:"PM Awas Yojana Gramin - 2.5 Lakh",desc:"Garibo ko pakka makan ke liye 2.5 Lakh sahayata.",full:"Fayda: 2.5 Lakh<br>Patrata: BPL Card<br>Doc: Aadhar, Bank Passbook",tag:"b-central"},
+{id:2,cat:"Central",title:"PM Awas Shahari - 2.5 Lakh",desc:"Shahar me makan ke liye 2.5 Lakh.",full:"Fayda: 2.5 Lakh<br>Patrata: Shahar me makan na ho",tag:"b-central"},
+{id:3,cat:"State",title:"UP Free Laptop Yojana 2026",desc:"12th 65%+ wale ko free laptop.",full:"Fayda: Free Laptop + Bag<br>Doc: Marksheet, Aadhar",tag:"b-state"},
+{id:4,cat:"Kisan",title:"PM Kisan Samman Nidhi - 6000/year",desc:"Kisano ko 6000 salana 3 kishto me.",full:"Fayda: 6000/year<br>Doc: Khatauni",tag:"b-kisan"},
+{id:5,cat:"Kisan",title:"Kisan Credit Card - 3 Lakh Loan",desc:"Bina guarantee 3 Lakh tak 4% byaj par.",full:"Fayda: 3 Lakh Loan",tag:"b-kisan"},
+{id:6,cat:"Kisan",title:"Free Boring Yojana UP",desc:"Kisano ko free boring / nalkoop.",full:"Fayda: Free Boring",tag:"b-kisan"},
+{id:7,cat:"Central",title:"PM Surya Ghar - Free Solar 300 Unit",desc:"Free bijli 300 unit + subsidy 78000.",full:"Fayda: 78000 subsidy + free bijli",tag:"b-central"},
+{id:8,cat:"Mahila",title:"Free Silai Machine + 15000",desc:"Mahilao ko free machine.",full:"Fayda: Machine + 15000 bhatta",tag:"b-central"},
+{id:9,cat:"Mahila",title:"Kanya Sumangala - 25000",desc:"Beti ke janm se padhai tak 25000.",full:"Fayda: 6 kishto me 25000",tag:"b-state"},
+{id:10,cat:"State",title:"UP Vidhwa Pension - 1000/month",desc:"Vidhwa mahilao ko 1000 mahina.",full:"Fayda: 1000/month",tag:"b-state"},
+{id:11,cat:"State",title:"UP Vridha Pension - 1000/month",desc:"60+ buzurg ko 1000 mahina.",full:"Fayda: 1000/month",tag:"b-state"},
+{id:12,cat:"State",title:"Divyang Pension - 1000/month",desc:"Divyang jan ko 1000 mahina.",full:"Fayda: 1000/month + other labh",tag:"b-state"},
+{id:13,cat:"Central",title:"Ayushman Card - 5 Lakh Free Ilaj",desc:"5 Lakh tak free ilaj.",full:"Fayda: 5 Lakh health cover",tag:"b-central"},
+{id:14,cat:"Central",title:"Ujjwala Yojana - Free Gas",desc:"Free gas cylinder + chulha.",full:"Fayda: Free Connection",tag:"b-central"},
+{id:15,cat:"Central",title:"PM Vishwakarma - 15000 + Toolkit",desc:"Karigaro ko 15000 + toolkit.",full:"Fayda: 15000 + Training",tag:"b-central"},
+{id:16,cat:"Rozgar",title:"MGNREGA Job Card - 100 Din",desc:"100 din pakka rozgar.",full:"Fayda: 100 din kaam",tag:"b-state"},
+{id:17,cat:"Shiksha",title:"UP Scholarship - 50000",desc:"Gareeb chhatro ko 50000.",full:"Fayda: 50000/year",tag:"b-state"},
+{id:18,cat:"Rozgar",title:"PM Mudra Loan - 10 Lakh",desc:"Bina guarantee 10 Lakh tak loan.",full:"Fayda: 10 Lakh loan",tag:"b-central"},
+{id:19,cat:"Central",title:"E-Shram Card - 2000 + Bima",desc:"Majduro ko 2000 + 2 Lakh bima.",full:"Fayda: 2000 + bima",tag:"b-central"},
+{id:20,cat:"Central",title:"New Ration Card 2026",desc:"Naya ration card online aavedan.",full:"Fayda: Free Ration",tag:"b-central"},
+{id:21,cat:"State",title:"ODOP Yojana UP - 2 Lakh Loan",desc:"Apna business shuru karne ko 2 Lakh.",full:"Fayda: 2 Lakh loan subsidy",tag:"b-state"}
+];
+let curCat='All',current=null;
+const cats=['All','Central','State','Kisan','Mahila','Rozgar','Shiksha'];
+function initFilters(){let h='';cats.forEach(c=>{h+=`<span class="chip ${curCat===c?'active':''}" onclick="setCat('${c}')">${c}</span>`});document.getElementById('filters').innerHTML=h;}
+function setCat(c){curCat=c;initFilters();render();}
+function render(){
+let q=document.getElementById('search').value.toLowerCase();
+let list=yojanas.filter(y=>{
+let mCat=curCat==='All'||y.cat===curCat;
+let mQ=y.title.toLowerCase().includes(q)||y.desc.toLowerCase().includes(q);
+return mCat&&mQ;
+});
+document.getElementById('list').innerHTML=list.map(y=>`<div class="card" onclick="openDetail(${y.id})"><span class="badge ${y.tag}">${y.cat}</span><h3>${y.title}</h3><p>${y.desc}</p><div style="margin-top:8px;font-size:11px;color:#10b981">✔ Receipt • ✔ PDF • ✔ WhatsApp</div></div>`).join('');
+}
+function openDetail(id){current=yojanas.find(y=>y.id===id);document.getElementById('dTitle').innerText=current.title;document.getElementById('dBody').innerHTML=`<span class="badge ${current.tag}">${current.cat}</span><h2 style="margin:10px 0">${current.title}</h2><p style="line-height:1.7">${current.full}</p>`;document.getElementById('detail').style.display='block';document.getElementById('success').style.display='none';}
+function closeDetail(){document.getElementById('detail').style.display='none';}
+function submitForm(){
+let n=document.getElementById('name').value.trim();let m=document.getElementById('mobile').value.trim();let z=document.getElementById('zila').value;
+if(n.length<3){alert('Naam likho');return;} if(!/^[6-9]\d{9}$/.test(m)){alert('Mobile sahi likho');return;} if(!z){alert('Zila chuno');return;}
+let receipt='MA-'+new Date().getFullYear()+'-'+Math.floor(10000+Math.random()*90000);
+let data={date:new Date().toLocaleString('hi-IN'),yojana:current.title,cat:current.cat,name:n,mobile:m,zila:z,receipt:receipt,status:'Pending'};
+let all=JSON.parse(localStorage.getItem('mera_adhikar_forms')||'[]');all.push(data);localStorage.setItem('mera_adhikar_forms',JSON.stringify(all));
+const {jsPDF}=window.jspdf;let doc=new jsPDF();doc.text('Mera Adhikar Receipt',20,20);doc.text('Receipt: '+receipt,20,30);doc.text('Name: '+n,20,40);doc.text('Yojana: '+current.title,20,50);doc.text('Mobile: '+m,20,60);doc.text('Date: '+data.date,20,70);let pdf=doc.output('datauristring');
+document.getElementById('success').style.display='block';
+document.getElementById('success').innerHTML=`<b>✅ Safal!</b><br>Receipt: <b>${receipt}</b><br><br><button onclick="window.open('${pdf}')" style="padding:10px 14px;border-radius:8px;background:#111827;color:#fff;border:none">📄 PDF Download</button><a href="https://wa.me/91${m}?text=Receipt ${receipt} ${current.title}" target="_blank" style="display:inline-block;margin-left:8px;padding:10px 14px;border-radius:8px;background:#25D366;color:#fff;text-decoration:none">WhatsApp</a>`;
+}
+initFilters();render();
+</script>
+</body>
 </html>
