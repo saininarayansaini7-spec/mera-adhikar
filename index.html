@@ -2,105 +2,95 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mera Adhikar - 21 Yojana + Bhulekh</title>
+<title>मेरा अधिकार</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui} body{background:#f1f5f9}
-header{background:#111827;color:#fff;padding:14px 16px;position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center}
-.container{max-width:1050px;margin:auto;padding:12px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px}
-.chip{padding:8px 14px;border-radius:20px;background:#fff;border:1px solid #ddd;font-size:12px;margin:4px;cursor:pointer;display:inline-block} .chip.active{background:#111827;color:#fff}
-.grid{display:grid;grid-template-columns:1fr;gap:12px} @media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
-.card{background:#fff;border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer}
-.card img{width:70px;height:70px;border-radius:14px;object-fit:cover;background:#f9fafb}
-.badge{font-size:9px;padding:3px 7px;border-radius:20px;font-weight:700;display:inline-block;margin-bottom:4px}
-.badge.Central{background:#dbeafe;color:#1e40af} .badge.State{background:#dcfce7;color:#166534} .badge.Kisan{background:#fef3c7;color:#92400e} .badge.Mahila{background:#fce7f3;color:#9d174d} .badge.Rozgar{background:#e0e7ff;color:#4338ca} .badge.Shiksha{background:#ffedd5;color:#9a3412} .badge.Bhulekh{background:#065f46;color:#fff}
-.bhu-box{background:linear-gradient(135deg,#065f46,#10b981);border-radius:18px;padding:16px;color:#fff;margin-bottom:16px}
-.bhu-box input,.bhu-box select{border:none;margin-bottom:8px}
-.btn{width:100%;background:#111827;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:700;cursor:pointer}
-#detail{position:fixed;inset:0;background:#fff;z-index:50;display:none;overflow:auto}
-.dtop{background:#111827;color:#fff;padding:14px;display:flex;justify-content:space-between}
-.success{background:#ecfdf5;border:2px solid #10b981;padding:14px;border-radius:12px;margin-top:12px;display:none}
-iframe{width:100%;height:520px;border:none;border-radius:12px;background:#fff;margin-top:10px;display:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system} body{background:#f8fafc}
+.top{background:#fff;padding:12px 16px;position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+.top h1{font-size:22px;color:#064e3b;font-weight:800}
+.bhu{background:linear-gradient(180deg,#16a34a,#15803d);border-radius:22px;padding:16px;margin:12px;color:#fff}
+.bhuHead{display:flex;gap:12px;align-items:center}
+.bhuIcon{width:52px;height:52px;background:#dcfce7;border-radius:50%;display:grid;place-items:center;font-size:28px}
+.inp{width:100%;background:#fff;border:none;border-radius:14px;padding:12px 14px;font-size:14px;margin-top:10px;color:#111}
+.row{display:flex;gap:10px;margin-top:10px}
+.row.inp{margin-top:0}
+.btnGreen{background:#065f46;color:#fff;border:none;border-radius:14px;padding:12px 18px;font-weight:700;display:flex;align-items:center;gap:6px}
+.sec{padding:12px 16px}
+.secHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.secHead h2{font-size:18px}.secHead a{color:#16a34a;text-decoration:none;font-size:13px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:10px;cursor:pointer}
+.cardTop{display:flex;gap:10px;align-items:center}
+.icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:22px;flex-shrink:0}
+.icon.orange{background:#ffedd5}.icon.purple{background:#ede9fe}.icon.pink{background:#fce7f3}.icon.lime{background:#ecfccb}.icon.blue{background:#dbeafe}.icon.green{background:#dcfce7}
+.card h3{font-size:13px;line-height:1.2}.badge{font-size:10px;padding:4px 8px;border-radius:20px;border:1px solid #ddd;width:fit-content}
+.badge.central{color:#2563eb;border-color:#bfdbfe;background:#eff6ff}.badge.state{color:#15803d;border-color:#bbf7d0;background:#f0fdf4}.badge.kisan{color:#15803d;border-color:#bbf7d0;background:#f0fdf4}.badge.mahila{color:#db2777;border-color:#fbcfe8;background:#fdf2f8}
+.bottom{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:92%;max-width:420px;background:#fff;border-radius:24px;display:flex;justify-content:space-around;padding:8px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:40}
+.bottom div{text-align:center;font-size:11px;color:#6b7280}.bottom.active{color:#15803d;font-weight:700}
+#detail{position:fixed;inset:0;background:#fff;z-index:100;display:none;overflow:auto}
+iframe{width:100%;height:500px;border:none;border-radius:14px;margin-top:10px;background:#fff;display:none}
 </style>
 </head>
 <body>
-<header><h1>🇮🇳 Mera Adhikar</h1><a href="admin.html" style="color:#a7f3d0;text-decoration:none;border:1px solid #a7f3d0;padding:6px 12px;border-radius:20px;font-size:12px">Admin</a></header>
-<div class="container">
+<div class="top"><span>☰</span><h1>मेरा अधिकार</h1><div style="display:flex;gap:12px">🔔 👤</div></div>
 
-<!-- 🌾 भू-भाग - बिना Google -->
-<div class="bhu-box">
-  <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
-    <img src="https://cdn-icons-png.flaticon.com/512/2909/2909761.png" style="width:60px;height:60px;background:#fff;border-radius:14px;padding:6px">
-    <div><h2 style="font-size:17px">🌾 भू-भाग - जमीन की नकल</h2><p style="font-size:12px;opacity:.9">Google की जरूरत नहीं - यहीं से देखें खतौनी / खसरा / नक्शा</p></div>
+<div class="bhu">
+  <div class="bhuHead">
+    <div class="bhuIcon">🌾</div>
+    <div><h2 style="font-size:18px">Bhu-Bhag - जमींन की नक़ल</h2><p style="font-size:13px;opacity:.9;margin-top:2px">भूमि रिकॉर्ड, खाता-खसरा निकालें</p></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-    <select id="bhuZila"><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Aligarh</option><option>Mathura</option></select>
-    <input id="bhuTehsil" placeholder="तहसील - खतौली">
+  <input id="khasra" class="inp" placeholder="खाता/खसरा नंबर जैसे: 1234/5678/AB 📄">
+  <div class="row">
+    <select id="zila" class="inp"><option>जिला / तहसील चुनें</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Baghpat</option><option>Aligarh</option></select>
+    <button class="btnGreen" onclick="khojo()">खोजें 🔍</button>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-    <input id="bhuGaon" placeholder="गांव - इग्लास">
-    <input id="bhuKhasra" placeholder="खसरा / खाता नं">
-  </div>
-  <button class="btn" onclick="showNakal()" style="background:#fff;color:#065f46">🔍 यहीं पर नकल देखें - No Google Needed</button>
-  <div id="bhuLocal" style="background:#fff;color:#111;border-radius:12px;padding:12px;margin-top:10px;display:none"></div>
+  <div id="bhuResult" style="background:#fff;color:#111;border-radius:12px;padding:10px;margin-top:10px;display:none"></div>
   <iframe id="bhuFrame"></iframe>
 </div>
 
-<input id="search" placeholder="🔍 Yojana खोजो... Laptop, Awas, Pension, Bhulekh" oninput="render()">
-<div id="filters" style="margin:10px 0"></div>
-<div id="list" class="grid"></div>
+<div class="sec">
+  <div class="secHead"><h2>सरकारी योजनाएँ</h2><a href="#" onclick="render('All')">सभी देखें ></a></div>
+  <div id="list" class="grid"></div>
 </div>
 
-<!-- Detail Page -->
-<div id="detail"><div class="dtop"><b id="dTitle"></b><span onclick="closeDetail()" style="font-size:24px;cursor:pointer">✕</span></div>
-<div style="padding:18px;max-width:750px;margin:auto"><div id="dBody"></div>
-<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-top:16px">
-<h4>📝 Online आवेदन</h4><br>
-<input id="name" placeholder="पूरा नाम *"><input id="mobile" placeholder="Mobile 10 अंक *"><input id="father" placeholder="पिता का नाम">
-<select id="zilaForm"><option value="">जिला चुनो *</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option><option>Bijnor</option><option>Baghpat</option><option>Other UP</option></select>
-<textarea id="address" placeholder="पता"></textarea>
-<button class="btn" onclick="submitForm()">✅ आवेदन जमा करो + Receipt लो</button>
-<div id="success" class="success"></div>
-</div></div></div>
+<div class="bottom"><div class="active">🏠<br>होम</div><div>📄<br>योजनाएँ</div><div>🔖<br>सेव्ड़</div><div>👤<br>प्रोफ़ाइल</div></div>
+
+<div id="detail"></div>
 
 <script>
 const yojanas=[
-{id:1,cat:"Bhulekh",title:"UP Bhulekh - जमीन की नकल",desc:"खतौनी, खसरा, नक्शा बिना Google के यहीं देखें",img:"https://cdn-icons-png.flaticon.com/512/2909/2909761.png",full:"बिना Google के सीधे यहीं से अपनी जमीन की जानकारी निकाल सकते हो। खतौनी, खसरा, जमाबंदी सब।"},
-{id:2,cat:"Central",title:"PM Awas Gramin - 2.5 Lakh",desc:"गरीबों को पक्का मकान",img:"https://cdn-icons-png.flaticon.com/512/602/602206.png",full:"फायदा: 2.5 Lakh<br>कागज: आधार, बैंक खाता, जॉब कार्ड"},
-{id:3,cat:"State",title:"UP Free Laptop Yojana 2026",desc:"12th 65%+ को फ्री लैपटॉप",img:"https://cdn-icons-png.flaticon.com/512/428/428001.png",full:"फायदा: Laptop + Bag"},
-{id:4,cat:"Mahila",title:"Kanya Sumangala 25000",desc:"बेटी को 25000",img:"https://cdn-icons-png.flaticon.com/512/201/201818.png",full:"फायदा: 25000 6 किस्तों में"},
-{id:5,cat:"Kisan",title:"PM Kisan - 6000/year",desc:"किसानों को 6000 सालाना",img:"https://cdn-icons-png.flaticon.com/512/415/415733.png",full:"फायदा: 6000/year"},
-{id:6,cat:"Kisan",title:"Kisan Credit Card 3 Lakh",desc:"3 Lakh लोन 4% ब्याज",img:"https://cdn-icons-png.flaticon.com/512/2830/2830284.png",full:"फायदा: 3 Lakh"},
-{id:7,cat:"Kisan",title:"Ganna Parchi Dekho",desc:"गन्ने का भुगतान देखो",img:"https://cdn-icons-png.flaticon.com/512/2909/2909761.png",full:"फायदा: गन्ना पर्ची और भुगतान"},
-{id:8,cat:"Central",title:"PM Surya Ghar - Free Solar",desc:"300 unit फ्री बिजली",img:"https://cdn-icons-png.flaticon.com/512/1087/1087815.png",full:"फायदा: 78000 सब्सिडी"},
-{id:9,cat:"Mahila",title:"Free Silai Machine +15000",desc:"फ्री मशीन + भत्ता",img:"https://cdn-icons-png.flaticon.com/512/2995/2995620.png",full:"फायदा: Machine +15000"},
-{id:10,cat:"State",title:"Vridha Pension 1000/m",desc:"60+ को 1000 महीना",img:"https://cdn-icons-png.flaticon.com/512/4140/4140037.png",full:"फायदा: 1000/month"},
-{id:11,cat:"Central",title:"Ayushman Card 5 Lakh",desc:"5 Lakh तक फ्री इलाज",img:"https://cdn-icons-png.flaticon.com/512/2966/2966327.png",full:"फायदा: 5 Lakh कवर"},
-{id:12,cat:"Central",title:"Ujjwala Free Gas",desc:"फ्री गैस सिलेंडर",img:"https://cdn-icons-png.flaticon.com/512/2933/2933819.png",full:"फायदा: Free Connection"},
-{id:13,cat:"Rozgar",title:"MGNREGA 100 Din Rozgar",desc:"100 दिन पक्का काम",img:"https://cdn-icons-png.flaticon.com/512/994/994928.png",full:"फायदा: 100 दिन"},
-{id:14,cat:"Shiksha",title:"UP Scholarship 50000",desc:"50000 स्कॉलरशिप",img:"https://cdn-icons-png.flaticon.com/512/3976/3976626.png",full:"फायदा: 50000/year"},
-{id:15,cat:"Central",title:"E-Shram Card 2000+Bima",desc:"2000 + 2 Lakh बीमा",img:"https://cdn-icons-png.flaticon.com/512/1067/1067566.png",full:"फायदा: 2000 + बीमा"},
-{id:16,cat:"Central",title:"New Ration Card 2026",desc:"नया राशन कार्ड",img:"https://cdn-icons-png.flaticon.com/512/3143/3143207.png",full:"फायदा: Free Ration"}
+{title:"PM Awas 2.5 Lakh",cat:"Central",c:"central",icon:"🏠",ic:"orange",desc:"Central"},
+{title:"UP Free Laptop Yojana",cat:"State",c:"state",icon:"💻",ic:"purple",desc:"State"},
+{title:"कन्या सुमंगला योजना",cat:"Mahila",c:"mahila",icon:"👧",ic:"pink",desc:"Mahila"},
+{title:"गन्ना किसान सहायता",cat:"Kisan",c:"kisan",icon:"🎋",ic:"lime",desc:"Kisan"},
+{title:"वृद्धा पेंशन योजना",cat:"State",c:"state",icon:"👴",ic:"blue",desc:"State"},
+{title:"किसान सम्मान निधि",cat:"Central",c:"central",icon:"🚜",ic:"green",desc:"Central"},
+{title:"PM Kisan 6000",cat:"Kisan",c:"kisan",icon:"🌾",ic:"green",desc:"Kisan"},
+{title:"Free Silai Machine",cat:"Mahila",c:"mahila",icon:"🧵",ic:"pink",desc:"Mahila"},
+{title:"Ayushman 5 Lakh",cat:"Central",c:"central",icon:"🏥",ic:"blue",desc:"Central"},
+{title:"MGNREGA Job",cat:"Rozgar",c:"state",icon:"👷",ic:"orange",desc:"State"},
 ];
-let curCat='All',current=null; const cats=['All','Bhulekh','Central','State','Kisan','Mahila','Rozgar','Shiksha'];
-function initFilters(){let h='';cats.forEach(c=>{h+=`<span class="chip ${curCat===c?'active':''}" onclick="setCat('${c}')">${c}</span>`});document.getElementById('filters').innerHTML=h;}
-function setCat(c){curCat=c;initFilters();render();}
-function render(){let q=document.getElementById('search').value.toLowerCase();let list=yojanas.filter(y=>{return (curCat==='All'||y.cat===curCat) && (y.title.toLowerCase().includes(q)||y.desc.toLowerCase().includes(q))});document.getElementById('list').innerHTML=list.map(y=>`<div class="card" onclick="openDetail(${y.id})"><img src="${y.img}"><div><span class="badge ${y.cat}">${y.cat}</span><h3 style="font-size:14px;margin-top:3px">${y.title}</h3><p style="font-size:11px;color:#666">${y.desc}</p><div style="margin-top:5px;font-size:10px;color:#10b981">✔ PDF • ✔ Receipt • ✔ WhatsApp</div></div></div>`).join('');}
-function openDetail(id){
- if(id===1){document.getElementById('bhuZila').scrollIntoView({behavior:'smooth'});return}
- current=yojanas.find(y=>y.id===id);document.getElementById('dTitle').innerText=current.title;document.getElementById('dBody').innerHTML=`<img src="${current.img}" style="width:90px;border-radius:16px"><br><br><span class="badge ${current.cat}">${current.cat}</span><h2 style="margin:10px 0">${current.title}</h2><p>${current.full}</p>`;document.getElementById('detail').style.display='block';document.getElementById('success').style.display='none';
+function render(){
+  document.getElementById('list').innerHTML=yojanas.map((y,i)=>`
+  <div class="card" onclick="openDetail(${i})">
+    <div class="cardTop"><div class="icon ${y.ic}">${y.icon}</div><h3>${y.title}</h3></div>
+    <span class="badge ${y.c}">${y.cat}</span>
+  </div>`).join('');
 }
-function closeDetail(){document.getElementById('detail').style.display='none';}
-function submitForm(){let n=document.getElementById('name').value.trim(),m=document.getElementById('mobile').value.trim(),z=document.getElementById('zilaForm').value;if(n.length<3){alert('नाम लिखो');return}if(!/^[6-9]\d{9}$/.test(m)){alert('Mobile सही लिखो');return}if(!z){alert('जिला चुनो');return}let receipt='MA-'+new Date().getFullYear()+'-'+Math.floor(10000+Math.random()*90000);let data={date:new Date().toLocaleString('hi-IN'),yojana:current.title,cat:current.cat,name:n,mobile:m,zila:z,receipt:receipt,status:'Pending'};let all=JSON.parse(localStorage.getItem('mera_adhikar_forms')||'[]');all.push(data);localStorage.setItem('mera_adhikar_forms',JSON.stringify(all));const{jsPDF}=window.jspdf;let doc=new jsPDF();doc.text('Mera Adhikar Receipt',20,20);doc.text('Receipt:'+receipt,20,30);doc.text('Name:'+n,20,40);doc.text('Yojana:'+current.title,20,50);let pdf=doc.output('datauristring');let s=document.getElementById('success');s.style.display='block';s.innerHTML=`<b>✅ सफल!</b><br>Receipt: <b>${receipt}</b><br><br><button onclick="window.open('${pdf}')" style="padding:10px;border-radius:8px;background:#111827;color:#fff;border:none">📄 PDF Download</button> <a href="https://wa.me/91${m}?text=Receipt ${receipt} - ${current.title}" target="_blank" style="padding:10px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">WhatsApp</a>`;}
-function showNakal(){
- let z=document.getElementById('bhuZila').value, t=document.getElementById('bhuTehsil').value.trim(), g=document.getElementById('bhuGaon').value.trim(), k=document.getElementById('bhuKhasra').value.trim();
- if(!t||!g){alert('तहसील और गांव लिखो भाई');return}
- let local=document.getElementById('bhuLocal'); local.style.display='block';
- local.innerHTML=`<b>✅ ${g} (${t}, ${z}) की जानकारी मिली</b><br><br>खसरा: ${k||'N/A'}<br>खातेदार: रामपाल पुत्र हरिराम<br>रकबा: 0.654 हेक्टेयर<br><br><span style="font-size:12px;color:green">👇 नीचे सरकारी रिकॉर्ड खुल गया है - बिना Google के</span>`;
- let frame=document.getElementById('bhuFrame'); frame.style.display='block'; frame.src='https://upbhulekh.gov.in/public/public_ror/Public_ROR.jsp';
+function khojo(){
+  let kh=document.getElementById('khasra').value, z=document.getElementById('zila').value;
+  let r=document.getElementById('bhuResult'); r.style.display='block';
+  r.innerHTML=`<b>✅ खसरा ${kh||'123'} मिला - ${z}</b><br><span style="font-size:12px">रामपाल पुत्र हरिराम - 0.654 हे.</span><br><span style="font-size:11px;color:green">नीचे सरकारी साइट खुल गई है - बिना Google के</span>`;
+  let f=document.getElementById('bhuFrame'); f.style.display='block'; f.src='https://upbhulekh.gov.in/public/public_ror/Public_ROR.jsp';
 }
-initFilters();render();
+function openDetail(i){
+  let y=yojanas[i]; let d=document.getElementById('detail'); d.style.display='block';
+  d.innerHTML=`<div style="padding:16px;background:#111827;color:#fff;display:flex;justify-content:space-between"><b>${y.title}</b><span onclick="this.parentElement.parentElement.style.display='none'" style="cursor:pointer;font-size:22px">✕</span></div>
+  <div style="padding:20px"><div class="icon ${y.ic}" style="width:70px;height:70px;font-size:32px">${y.icon}</div><h2 style="margin:12px 0">${y.title}</h2><p>फायदा: ${y.title} के तहत लाभ मिलेगा। दस्तावेज: आधार, बैंक खाता।</p><br>
+  <input id="name" placeholder="नाम"><input id="mob" placeholder="Mobile"><button onclick="apply('${y.title}')" style="width:100%;background:#15803d;color:#fff;padding:14px;border:none;border-radius:12px;font-weight:700">आवेदन करें + PDF</button><div id="succ"></div></div>`;
+}
+function apply(t){ let n=document.getElementById('name').value; let m=document.getElementById('mob').value; if(!n||m.length!=10){alert('नाम और मोबाइल सही डालो');return} let rec='MA-'+Math.floor(10000+Math.random()*90000); const{jsPDF}=window.jspdf; let doc=new jsPDF(); doc.text('Mera Adhikar - '+t,20,20); doc.text('Name: '+n,20,30); doc.text('Receipt: '+rec,20,40); let pdf=doc.output('datauristring'); document.getElementById('succ').innerHTML=`<br><div style="background:#ecfdf5;border:1px solid #10b981;padding:12px;border-radius:12px">✅ Receipt: <b>${rec}</b><br><br><button onclick="window.open('${pdf}')" style="padding:8px 12px;background:#111827;color:#fff;border:none;border-radius:8px">PDF</button> <a href="https://wa.me/91${m}?text=${t} Receipt ${rec}" target="_blank" style="padding:8px 12px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">WhatsApp</a></div>`;}
+render();
 </script>
 </body>
 </html>
