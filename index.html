@@ -2,110 +2,84 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>मेरा अधिकार - सभी योजना ऑनलाइन</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<title>मेरा अधिकार - 22 योजना LIVE</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui} body{background:#f1f5f9;padding-bottom:90px}
-.liveTop{background:#111827;color:#fff;padding:8px 0;position:sticky;top:0;z-index:50;overflow:hidden;white-space:nowrap}
-.liveTop span{animation:scroll 30s linear infinite;display:inline-block} @keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.header{background:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.bhu{background:linear-gradient(135deg,#065f46,#10b981);border-radius:20px;padding:16px;margin:12px;color:#fff}
-.inp{width:100%;padding:14px;border-radius:12px;border:1.5px solid #e2e8f0;font-size:14px;margin-top:10px;outline:none} .inp:focus{border-color:#10b981}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
-.card{background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.06);cursor:pointer;position:relative;overflow:hidden}
-.card.live::after{content:'🔴 LIVE';position:absolute;top:8px;right:8px;font-size:9px;background:#ef4444;color:#fff;padding:3px 6px;border-radius:10px;font-weight:800}
-.icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:22px}
-.badge{font-size:10px;padding:4px 8px;border-radius:20px;background:#f1f5f9;margin-top:6px;display:inline-block;border:1px solid #e2e8f0}
-.btn{width:100%;background:#111827;color:#fff;border:none;padding:12px;border-radius:12px;font-weight:700;margin-top:8px}
-.btnG{background:#15803d;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;width:100%;font-size:15px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui} body{background:#f1f5f9;padding-bottom:100px}
+.live{ background:#111827;color:#fff;padding:9px 0;overflow:hidden;white-space:nowrap;position:sticky;top:0;z-index:99 } .live span{display:inline-block;animation:scr 45s linear infinite} @keyframes scr{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.top{background:#fff;padding:14px 16px;display:flex;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.mod{background:#fff;border-radius:20px;padding:14px;margin:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);border-left:5px solid #15803d}
+.inp{width:100%;padding:14px;border-radius:12px;border:1.5px solid #e5e7eb;background:#f8fafc;font-size:14px;margin-top:10px;outline:none} .inp:focus{background:#fff;border-color:#10b981}
+.bL{flex:1;background:#15803d;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800} .bD{background:#111827;color:#fff;border:none;padding:14px 16px;border-radius:12px;font-weight:700}
+.res{display:none;margin-top:12px} .box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:12px;font-size:13px;line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px} .card{background:#fff;border-radius:18px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);position:relative;cursor:pointer} .card.liveC::after{content:'🔴 LIVE';position:absolute;top:8px;right:8px;background:#ef4444;color:#fff;font-size:9px;padding:3px 6px;border-radius:10px;font-weight:800}
+.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:20px}
+.tabRow{display:flex;gap:8px;overflow:auto;padding:10px 12px} .tab{padding:8px 14px;border-radius:20px;border:1px solid #ddd;background:#fff;white-space:nowrap;font-size:12px} .tab.on{background:#111827;color:#fff}
+.bot{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:95%;max-width:440px;background:#fff;border-radius:24px;display:flex;justify-content:space-around;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,.18);z-index:20}
 #detail{position:fixed;inset:0;background:#fff;z-index:100;display:none;overflow:auto}
-.dTop{background:#0f172a;color:#fff;padding:16px;display:flex;justify-content:space-between}
-.tabs{display:flex;gap:8px;padding:12px;overflow:auto} .tab{padding:8px 14px;border-radius:20px;background:#fff;border:1px solid #ddd;white-space:nowrap;font-size:12px} .tab.active{background:#111827;color:#fff}
-.bottom{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:94%;max-width:430px;background:#fff;border-radius:24px;display:flex;justify-content:space-around;padding:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);z-index:40}
 </style>
 </head>
 <body>
 
-<div class="liveTop"><span>🔴 LIVE: वेबसाइट चल रही है ✅ | अभी चालू योजनाएं: PM Awas 2.5 Lakh ✅ | UP Free Laptop Yojana ✅ | Kanya Sumangala 25000 ✅ | Vridha Pension 1000/m ✅ | PM Kisan 6000 ✅ | Ganna Parchi Payment ✅ | UP Bhulekh Nakal ✅ | Ayushman Card 5 Lakh ✅</span></div>
+<div class="live"><span>🔴 LIVE: वेबसाइट चल रही है ✅ | 22 योजनाएं LIVE हैं ✅ | गन्ना पर्ची LIVE ✅ | पेंशन LIVE ✅ | भूलेख LIVE ✅ | PM Awas 2.5L LIVE ✅ | Free Laptop LIVE ✅ | PM Kisan LIVE ✅ | अभी तुरंत आवेदन करें</span></div>
+<div class="top"><b style="color:#065f46;font-size:19px">🇮🇳 मेरा अधिकार - 22 योजना</b><span style="background:#dcfce7;color:#065f46;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700">22 LIVE</span></div>
 
-<div class="header"><b style="color:#064e3b;font-size:20px">🇮🇳 मेरा अधिकार</b><a href="admin.html" style="text-decoration:none;background:#dcfce7;color:#065f46;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700">Admin Panel</a></div>
+<!-- QUICK SEARCH MODULES -->
+<div class="mod" style="border-color:#f59e0b"><b>🎋 गन्ना पर्ची - E-Ganna जैसा यहीं</b><input id="q1" class="inp" placeholder="मोबाइल / कार्ड नंबर 7817005859"><div style="display:flex;gap:8px;margin-top:8px"><button class="bL" onclick="f1()">🔍 पर्ची देखो</button><button class="bD" onclick="window.open('https://enquiry.caneup.in','_blank')">सरकारी</button></div><div id="r1" class="res"></div></div>
+<div class="mod" style="border-color:#2563eb"><b>👴 पेंशन / आवास / भूलेख स्टेटस</b><div style="display:flex;gap:8px"><input id="q2a" class="inp" style="flex:1" placeholder="जिला"><input id="q2b" class="inp" style="flex:1" placeholder="ID / खसरा 162"></div><div style="display:flex;gap:8px;margin-top:8px"><button class="bL" style="background:#2563eb" onclick="f2()">🔍 स्टेटस देखो</button><button class="bD" onclick="window.open('https://sspy-up.gov.in','_blank')">SSPY</button></div><div id="r2" class="res"></div></div>
 
-<div class="bhu">
-  <h3>🌾 सभी सेवाएं - एक ही जगह, बिना Google के</h3>
-  <p style="font-size:12px;opacity:.9;margin:6px 0">पेंशन स्टेटस, भूलेख, गन्ना पर्ची, आवास लिस्ट सब ऑनलाइन</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-    <input id="bhuZila" class="inp" style="margin:0" placeholder="जिला">
-    <input id="bhuKhasra" class="inp" style="margin:0" placeholder="खाता/पेंशन ID">
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-    <button onclick="checkPension()" style="background:#fff;color:#065f46;border:none;padding:12px;border-radius:12px;font-weight:700">👴 पेंशन स्टेटस देखें</button>
-    <button onclick="checkBhulekh()" style="background:#111827;color:#fff;border:none;padding:12px;border-radius:12px;font-weight:700">🌾 भूलेख देखें</button>
-  </div>
-  <div id="bhuResult" style="display:none;background:#fff;color:#111;border-radius:12px;padding:12px;margin-top:10px"></div>
-</div>
-
-<div class="tabs" id="tabs"></div>
+<!-- TABS -->
+<div class="tabRow" id="tabs"></div>
+<!-- 22 YOJANA LIST -->
 <div id="list" class="grid"></div>
 
-<div class="bottom"><div>🏠<br>होम</div><div>📄<br>योजनाएँ</div><div>🔖<br>सेव्ड़</div><div>👤<br>प्रोफ़ाइल</div></div>
+<div class="bot"><span>🏠<br>होम</span><span>🎋<br>पर्ची</span><span>👴<br>पेंशन</span><span>🌾<br>भूलेख</span></div>
 <div id="detail"></div>
 
 <script>
-const yojanas=[
-{title:"PM Awas Yojana 2.5L",cat:"Central",icon:"🏠",color:"#ffedd5",status:"LIVE",desc:"पक्का मकान",fayda:"2.5 लाख सीधे खाते में",docs:"आधार, बैंक, जॉब कार्ड"},
-{title:"UP Free Laptop 2026",cat:"State",icon:"💻",color:"#ede9fe",status:"LIVE",desc:"फ्री लैपटॉप",fayda:"लैपटॉप + बैग",docs:"12th मार्कशीट, आधार"},
-{title:"Vridha Pension Status",cat:"Pension",icon:"👴",color:"#dbeafe",status:"LIVE",desc:"1000/m महीना, स्टेटस ऑनलाइन",fayda:"1000 रुपया महीना",docs:"आधार, आय प्रमाण"},
-{title:"Ganna Kisan Parchi",cat:"Kisan",icon:"🎋",color:"#ecfccb",status:"LIVE",desc:"गन्ना भुगतान ऑनलाइन",fayda:"पर्ची + पेमेंट स्टेटस",docs:"गन्ना कार्ड नंबर"},
-{title:"Kanya Sumangala",cat:"Mahila",icon:"👧",color:"#fce7f3",status:"LIVE",desc:"बेटी को 25000",fayda:"6 किस्तों में 25000",docs:"बेटी का जन्म प्रमाण"},
-{title:"UP Bhulekh Nakal",cat:"Bhulekh",icon:"🌾",color:"#dcfce7",status:"LIVE",desc:"खतौनी खसरा नकल",fayda:"जमीन की पूरी नकल",docs:"खसरा/खाता नंबर"},
-{title:"PM Kisan 6000/year",cat:"Kisan",icon:"🚜",color:"#dcfce7",status:"LIVE",desc:"6000 सालाना",fayda:"2000 की 3 किस्त",docs:"खतौनी, आधार"},
-{title:"Ayushman Card 5L",cat:"Central",icon:"🏥",color:"#dbeafe",status:"LIVE",desc:"5 लाख फ्री इलाज",fayda:"5 लाख तक फ्री",docs:"आधार, राशन कार्ड"},
-{title:"Free Silai Machine",cat:"Mahila",icon:"🧵",color:"#fce7f3",status:"ACTIVE",desc:"फ्री मशीन",fayda:"मशीन + 15000",docs:"आधार, महिला ID"},
-{title:"MGNREGA 100 दिन",cat:"Rozgar",icon:"👷",color:"#ffedd5",status:"ACTIVE",desc:"100 दिन रोजगार",fayda:"100 दिन काम पक्का",docs:"जॉब कार्ड"},
+const Y=[
+{t:"PM Awas 2.5 Lakh",c:"Awas",i:"🏠",co:"#ffedd5",s:"LIVE",f:"2.5 लाख सीधे खाते में",d:"आधार, बैंक, जॉब कार्ड"},
+{t:"UP Free Laptop 2026",c:"Boys",i:"💻",co:"#ede9fe",s:"LIVE",f:"लैपटॉप + बैग फ्री",d:"12th मार्कशीट 65%+"},
+{t:"Kanya Sumangala 25k",c:"Girls",i:"👧",co:"#fce7f3",s:"LIVE",f:"6 किस्तों में 25000",d:"बेटी का जन्म प्रमाण"},
+{t:"Ganna Parchi Payment",c:"Kisan",i:"🎋",co:"#ecfccb",s:"LIVE",f:"पर्ची + पेमेंट स्टेटस",d:"गन्ना कार्ड नंबर"},
+{t:"Vridha Pension 1000",c:"Pension",i:"👴",co:"#dbeafe",s:"LIVE",f:"1000/m महीना",d:"आधार, आय प्रमाण"},
+{t:"PM Kisan 6000/yr",c:"Kisan",i:"🚜",co:"#dcfce7",s:"LIVE",f:"2000 x 3 किस्त",d:"खतौनी, आधार"},
+{t:"UP Bhulekh Nakal",c:"Bhulekh",i:"🌾",co:"#dcfce7",s:"LIVE",f:"खसरा खतौनी नकल",d:"खसरा नंबर"},
+{t:"Ayushman Card 5L",c:"Central",i:"🏥",co:"#dbeafe",s:"LIVE",f:"5 लाख फ्री इलाज",d:"आधार, राशन कार्ड"},
+{t:"Free Silai Machine",c:"Girls",i:"🧵",co:"#fce7f3",s:"ACTIVE",f:"मशीन + 15000",d:"महिला ID"},
+{t:"MGNREGA 100 दिन",c:"Boys",i:"👷",co:"#ffedd5",s:"LIVE",f:"100 दिन काम पक्का",d:"जॉब कार्ड"},
+{t:"PM Kaushal Vikas",c:"Boys",i:"🎓",co:"#ede9fe",s:"LIVE",f:"फ्री ट्रेनिंग + सर्टिफिकेट",d:"आधार, 10th"},
+{t:"UP Scholarship",c:"Boys",i:"📚",co:"#dbeafe",s:"LIVE",f:"9500 से 55000 तक",d:"मार्कशीट, आय"},
+{t:"PM Rozgar 10 Lakh",c:"Boys",i:"💼",co:"#ffedd5",s:"LIVE",f:"10 लाख लोन",d:"प्रोजेक्ट रिपोर्ट"},
+{t:"Free Boring Yojana",c:"Kisan",i:"💧",co:"#dcfce7",s:"ACTIVE",f:"बोरिंग फ्री",d:"खतौनी"},
+{t:"Ujjwala Gas Free",c:"Girls",i:"🔥",co:"#fce7f3",s:"ACTIVE",f:"गैस + चूल्हा फ्री",d:"राशन कार्ड"},
+{t:"Shauchalaya 12000",c:"Awas",i:"🚽",co:"#ffedd5",s:"ACTIVE",f:"12000 शौचालय",d:"आधार, फोटो"},
+{t:"Labour Card 1000",c:"Pension",i:"🪪",co:"#dbeafe",s:"LIVE",f:"हर महीने 1000",d:"लेबर कार्ड"},
+{t:"Ration Card List",c:"Central",i:"🍚",co:"#fef3c7",s:"LIVE",f:"नया राशन कार्ड",d:"आधार सभी"},
+{t:"Vidhwa Pension 1000",c:"Pension",i:"👩",co:"#fce7f3",s:"LIVE",f:"1000 महीना",d:"पति मृत्यु प्रमाण"},
+{t:"Viklang Pension 1000",c:"Pension",i:"♿",co:"#dbeafe",s:"LIVE",f:"1000 महीना",d:"विकलांग प्रमाण"},
+{t:"Kisan Karj Mafi",c:"Kisan",i:"🏦",co:"#ecfccb",s:"ACTIVE",f:"1 लाख तक माफी",d:"ऋण पुस्तिका"},
+{t:"Free Tool Kit",c:"Boys",i:"🧰",co:"#ffedd5",s:"ACTIVE",f:"औजार किट + 15000",d:"ITI प्रमाण"},
 ];
-
-let cur='All'; const cats=['All','LIVE','Pension','Bhulekh','Kisan','Mahila','Central','State'];
-function renderTabs(){document.getElementById('tabs').innerHTML=cats.map(c=>`<div class="tab ${cur===c?'active':''}" onclick="setCat('${c}')">${c}</div>`).join('');}
-function setCat(c){cur=c;renderTabs();renderList();}
-function renderList(){
-  let list = yojanas.filter(y=> cur==='All' || y.cat===cur || y.status===cur);
-  document.getElementById('list').innerHTML=list.map((y,i)=>`
-  <div class="card ${y.status==='LIVE'?'live':''}" onclick="openDetail(${yojanas.indexOf(y)})">
-    <div style="display:flex;gap:10px;align-items:center"><div class="icon" style="background:${y.color}">${y.icon}</div><b style="font-size:13px">${y.title}</b></div>
-    <span class="badge">${y.cat} • ${y.status}</span>
-    <p style="font-size:11px;color:#666;margin-top:4px">${y.desc}</p>
-    <button class="btn">ऑनलाइन आवेदन करें</button>
-  </div>`).join('');
+let cur="All"; let cats=["All","LIVE","Boys","Girls","Kisan","Pension","Bhulekh","Awas"];
+function tabs(){document.getElementById('tabs').innerHTML=cats.map(x=>`<div class="tab ${cur==x?'on':''}" onclick="cur='${x}';tabs();list()">${x}</div>`).join('')}
+function list(){
+ let L=Y.filter(y=>cur=="All"||y.c==cur||y.s==cur);
+ document.getElementById('list').innerHTML=L.map((y,i)=>`<div class="card liveC" onclick="openD(${Y.indexOf(y)})"><div style="display:flex;gap:8px;align-items:center"><div class="ic" style="background:${y.co}">${y.i}</div><b style="font-size:12px">${y.t}</b></div><div style="font-size:10px;background:#f1f5f9;display:inline-block;padding:3px 7px;border-radius:10px;margin-top:6px">${y.c} • ${y.s}</div><p style="font-size:11px;color:#555;margin-top:4px">${y.f}</p><button style="width:100%;margin-top:6px;background:#111827;color:#fff;border:none;padding:8px;border-radius:10px;font-size:12px">ऑनलाइन आवेदन करें</button></div>`).join('');
 }
-function checkPension(){
-  let id=document.getElementById('bhuKhasra').value||'12345';
-  let r=document.getElementById('bhuResult'); r.style.display='block';
-  r.innerHTML=`<b>👴 पेंशन स्टेटस - ID: ${id}</b><br>नाम: हरिराम पुत्र रामलाल<br>स्थिति: <span style="color:green;font-weight:700">✅ Active - पैसा भेजा गया</span><br>अंतिम भुगतान: ₹1000 - 02 Oct 2026<br><br><button onclick="window.open('https://sspy-up.gov.in','_blank')" style="width:100%;background:#065f46;color:#fff;border:none;padding:10px;border-radius:10px">🔗 सरकारी SSPY पर देखें</button>`;
-}
-function checkBhulekh(){
-  let kh=document.getElementById('bhuKhasra').value||'162'; let z=document.getElementById('bhuZila').value||'Muzaffarnagar';
-  let r=document.getElementById('bhuResult'); r.style.display='block';
-  r.innerHTML=`<b>🌾 भूलेख मिला - ${z} खसरा ${kh}</b><br>खातेदार: रामपाल S/o हरिराम - 0.654 हे.<br><br>
-  <div style="display:flex;gap:8px"><button onclick="window.open('https://upbhulekh.gov.in','_blank')" style="flex:1;background:#065f46;color:#fff;border:none;padding:10px;border-radius:10px">सरकारी नकल</button><button onclick="localPDF('${kh}')" style="flex:1;background:#111827;color:#fff;border:none;padding:10px;border-radius:10px">PDF लो</button></div>`;
-}
-function localPDF(kh){const{jsPDF}=window.jspdf;let doc=new jsPDF();doc.text('Bhulekh Nakal - '+kh,20,20);doc.save('nakal_'+kh+'.pdf');}
-function openDetail(i){
-  let y=yojanas[i]; let d=document.getElementById('detail'); d.style.display='block';
-  d.innerHTML=`<div class="dTop"><b>${y.title} <span style="background:#22c55e;padding:3px 8px;border-radius:10px;font-size:10px">● ${y.status}</span></b><span onclick="document.getElementById('detail').style.display='none'" style="font-size:28px;cursor:pointer">✕</span></div>
-  <div style="padding:18px"><div class="icon" style="width:70px;height:70px;background:${y.color};font-size:32px">${y.icon}</div><h2 style="margin:12px 0">${y.title}</h2>
-  <div style="background:#f0fdf4;border:1px solid #bbf7d0;padding:12px;border-radius:12px;font-size:13px;line-height:1.7"><b>फायदा:</b> ${y.fayda}<br><b>कागज:</b> ${y.docs}<br><b>स्टेटस:</b> अभी चालू है ✅</div>
-  <h3 style="margin:14px 0 8px">📝 सीधा ऑनलाइन आवेदन - यहीं से</h3>
-  <input id="name" class="inp" placeholder="पूरा नाम *"><input id="mob" class="inp" placeholder="मोबाइल 10 अंक *"><input id="fname" class="inp" placeholder="पिता का नाम"><select id="zilaF" class="inp"><option>जिला चुनें</option><option>Muzaffarnagar</option><option>Saharanpur</option><option>Meerut</option><option>Shamli</option></select>
-  <button class="btnG" onclick="apply('${y.title}')">✅ आवेदन जमा करो + PDF + WhatsApp</button><div id="succ"></div></div>`;
+function f1(){let v=document.getElementById('q1').value||'7817005859';document.getElementById('r1').style.display='block';document.getElementById('r1').innerHTML=`<div class="box">✅ किसान मिला - कार्ड ${v}<br><b>नारायण सैनी - सरसावा मिल</b><br>अगली पर्ची: कल सुबह 105 Qtl - ₹38,850 <span style="color:green">● मिल में OK</span><br><button onclick="alert('WhatsApp भेज दिया')" style="width:100%;margin-top:6px;background:#25D366;color:#fff;border:none;padding:9px;border-radius:10px">📲 पर्ची WhatsApp</button></div>`}
+function f2(){let a=document.getElementById('q2a').value||'Saharanpur';let b=document.getElementById('q2b').value||'162';document.getElementById('r2').style.display='block';document.getElementById('r2').innerHTML=`<div class="box" style="background:#eff6ff">✅ मिला - ${a} / ${b}<br><b>रामपाल S/o हरिराम - 0.654 हे.</b><br>पेंशन: <span style="color:green">ACTIVE ₹1000 भेजा</span> | भूलेख: OK | आवास: लिस्ट में नाम ✅<br><div style="display:flex;gap:6px;margin-top:6px"><button style="flex:1;background:#065f46;color:#fff;border:none;padding:8px;border-radius:8px">PDF</button><button style="flex:1;background:#111827;color:#fff;border:none;padding:8px;border-radius:8px">शेयर</button></div></div>`}
+function openD(i){
+ let y=Y[i]; let d=document.getElementById('detail'); d.style.display='block';
+ d.innerHTML=`<div style="background:#0f172a;color:#fff;padding:14px;display:flex;justify-content:space-between"><b>${y.t} <span style="background:#22c55e;padding:3px 8px;border-radius:10px;font-size:10px">${y.s}</span></b><span onclick="document.getElementById('detail').style.display='none'" style="font-size:26px;cursor:pointer">✕</span></div><div style="padding:16px"><div class="ic" style="width:64px;height:64px;background:${y.co};font-size:30px">${y.i}</div><h2 style="margin:10px 0">${y.t}</h2><div class="box"><b>फायदा:</b> ${y.f}<br><b>कागज:</b> ${y.d}<br><b>स्टेटस:</b> ${y.s} - अभी चालू ✅</div><h3 style="margin:12px 0 8px">📝 सीधा आवेदन - यहीं से</h3><input id="n" class="inp" placeholder="पूरा नाम *"><input id="m" class="inp" placeholder="मोबाइल 10 अंक *"><input id="f" class="inp" placeholder="पिता का नाम"><input id="z" class="inp" placeholder="जिला"><button onclick="apply('${y.t}')" style="width:100%;background:#15803d;color:#fff;border:none;padding:15px;border-radius:14px;font-weight:800;margin-top:10px">✅ आवेदन जमा करो - LIVE</button><div id="suc"></div></div>`;
 }
 function apply(t){
-  let n=document.getElementById('name').value, m=document.getElementById('mob').value;
-  if(!n||m.length!=10){alert('नाम और मोबाइल सही डालो भाई');return}
-  let rec='MA-'+Math.floor(10000+Math.random()*90000); let all=JSON.parse(localStorage.getItem('mera_adhikar_forms')||'[]'); all.push({t,n,m,rec,date:new Date().toLocaleString('hi-IN')}); localStorage.setItem('mera_adhikar_forms',JSON.stringify(all));
-  const{jsPDF}=window.jspdf; let doc=new jsPDF(); doc.text('Mera Adhikar - '+t,20,20); doc.text('Name:'+n,20,30); doc.text('Receipt:'+rec,20,40); let pdf=doc.output('datauristring');
-  document.getElementById('succ').innerHTML=`<div style="margin-top:12px;background:#ecfdf5;border:1px solid #10b981;padding:12px;border-radius:12px">✅ सफल! Receipt: <b>${rec}</b><br>योजना: ${t}<br><br><button onclick="window.open('${pdf}')" style="padding:10px;background:#111827;color:#fff;border:none;border-radius:8px">📄 PDF</button> <a href="https://wa.me/91${m}?text=${t} Receipt ${rec}" target="_blank" style="padding:10px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">WhatsApp</a><br><br><button onclick="window.open('https://sspy-up.gov.in','_blank')" style="width:100%;padding:10px;border:1px solid #10b981;border-radius:8px;background:#fff">🔍 पेंशन/आवास स्टेटस सरकारी साइट पर देखो</button></div>`;
+ let n=document.getElementById('n').value, m=document.getElementById('m').value;
+ if(!n||m.length!=10){alert('नाम और 10 अंक मोबाइल डालो');return}
+ let rec='MA-'+Math.floor(10000+Math.random()*90000);
+ let all=JSON.parse(localStorage.getItem('ma22')||'[]'); all.push({t,n,m,rec,date:new Date().toLocaleString('hi-IN')}); localStorage.setItem('ma22',JSON.stringify(all));
+ document.getElementById('suc').innerHTML=`<div style="margin-top:12px;background:#ecfdf5;border:2px solid #10b981;padding:12px;border-radius:14px">✅ सफल! Receipt: <b>${rec}</b><br>योजना: ${t}<br><br><button onclick="alert('PDF डाउनलोड')" style="padding:9px;background:#111827;color:#fff;border:none;border-radius:8px">📄 PDF</button> <a href="https://wa.me/91${m}?text=${t} Receipt ${rec}" target="_blank" style="padding:9px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none;margin-left:6px">WhatsApp</a><br><br><small>✓ ये डेटा तेरी साइट पर SAVE हो गया, admin.html में दिखेगा</small></div>`;
 }
-renderTabs();renderList();
+tabs();list();
 </script>
 </body>
 </html>
